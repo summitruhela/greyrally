@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>GREYRALLY</title>
+  <meta name="description" content="Latest updates and statistic charts">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+
+  <link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="/css/createAuction.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+  <link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+</head>
+
+<body>
+  <% include ../new-header.ejs %>
+    <div class="container mb-5">
+      <div class="row create-auction-header">
+        <div class="mr-auto">
+          <h3 class="create-auction">Create New Auction</h3>
+        </div>
+      </div>
+      <div class="row create-auction-wrapper h-100">
+        <form class="w-100 p-5" id="createAuction" autocomplete="autocomplete_off" novalidate>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              <div class="form-group">
+                <label for="auctionTitle">Title*</label>
+                <input type="text" class="form-control" id="auctionTitle" placeholder="Auction Title" maxlength="30" required>
+                <div class="invalid-feedback" id="titleError"></div>
+              </div>
+              <div class="form-group">
+                <label for="auctionDescription">Description*</label>
+                <textarea rows="3" class="form-control" id="auctionDescription" placeholder="Provide a summary of the exploit..." required></textarea>
+                <div class="invalid-feedback" id="descriptionError"></div>
+              </div>
+              <div class="form-group">
+                <label for="auctionUseCase">Use Case*</label>
+                <input type="text" class="form-control" id="auctionUseCase" placeholder="Auction Use Case" required>
+                <div class="invalid-feedback" id="useCaseError"></div>
+              </div>
+              <div class="form-group">
+                <label for="auctionOperatingSystem">Operating System*</label>
+                <select id="auctionOperatingSystem" class="form-control custom-select" required>
+                  <option value="Windows" selected>Windows</option>
+                  <option value="Linux">Linux</option>
+                  <option value="MacOS">MacOS</option>
+                  <option value="IOS">IOS</option>
+                  <option value="IOS">Android</option>
+                  <option value="Router - See Comments">Router - See Comments</option>
+                  <option value="Firewall - See Comments">Firewall - See Comments</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="auctionManufacturer">Manufacturer</label>
+                <input type="text" class="form-control" id="auctionManufacturer" placeholder="Manufacturer">
+                <div class="invalid-feedback" id="manufacturerError"></div>
+              </div>
+              <div class="form-group">
+                <label for="auctionDuration">Duration</label>
+                <input type="number" class="form-control" id="auctionDuration" min="0" placeholder="How long should this auction last? (In days)" required>
+                <div class="invalid-feedback" id="durationError"></div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+              <div class="form-group">
+                <label for="auctionType">Type*</label>
+                <select id="auctionType" class="form-control custom-select" required>
+                  <option value="Access Violation" selected>Access Violation</option>
+                  <option value="Injection">Injection</option>
+                  <option value="Full Execution">Full Execution</option>
+                  <option value="Information Leak">Information Leak</option>
+                  <option value="Resource Exhaustion">Resource Exhaustion</option>
+                </select>
+              </div>
+              <div class="row pl-3">
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="remoteExploit">
+                  <label class="form-check-label" for="remoteExploit">Remote Exploit</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="pathTraversal">
+                  <label class="form-check-label" for="pathTraversal">Path Traversal</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="localExploit">
+                  <label class="form-check-label" for="localExploit">Local Exploit</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="argumentInjection">
+                  <label class="form-check-label" for="argumentInjection">Argument Injection</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="weaponized">
+                  <label class="form-check-label" for="weaponized">Weaponized</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="codeInjection">
+                  <label class="form-check-label" for="codeInjection">Code Injection</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="elevation">
+                  <label class="form-check-label" for="elevation">Elevation</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="commandInjection">
+                  <label class="form-check-label" for="commandInjection">Command Injection</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="unauthorizedAccess">
+                  <label class="form-check-label" for="unauthorizedAccess">Unauthorized Access</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="sqlInjection">
+                  <label class="form-check-label" for="sqlInjection">SQL Injection</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="authenticationLogicError">
+                  <label class="form-check-label" for="authenticationLogicError">Authentication Logic Error</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="useAfterFreeError">
+                  <label class="form-check-label" for="useAfterFreeError">Use After Free Error</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="permissionsIssue">
+                  <label class="form-check-label" for="permissionsIssue">Permissions Issue</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="writeWhatWhere">
+                  <label class="form-check-label" for="writeWhatWhere">Write-What-Where</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="privilegeIssue">
+                  <label class="form-check-label" for="privilegeIssue">Privilege Issue</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="apiExposure">
+                  <label class="form-check-label" for="apiExposure">API Exposure</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="accessControlIssue">
+                  <label class="form-check-label" for="accessControlIssue">Access Control Issue</label>
+                </div>
+                <div class="form-check col-md-6">
+                  <input type="checkbox" class="form-check-input" id="denialOfService">
+                  <label class="form-check-label" for="denialOfService">Denial of Service</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="form-row upload-info">
+            <div class="form-group col-md-6">
+              <label for="auctionUpload">Upload Exploit Documentation</label>
+              <input type="file" class="form-control-file" id="auctionUpload" aria-describedby="uploadHelp"  multiple required>
+              <small id="uploadHelp" class="form-text text-muted">
+                NOTE: This is the auction payload. It should be how to guide for finding and using the exploit. This is what a buyer will
+                receive after successfully buying this auction. It will also be used by GREYRALLY experts to verify your
+                auction and assign it an impact score.
+              </small>
+              <div class="invalid-feedback" id="uploadError"></div>
+            </div>
+            <div class="form-group col-md-6">
+              <p class="pl-3">Encrypt your exploit documentation using GREYRALLY’s
+                <a href="/PGP/public">public-key</a> and your private-key to sign it. </p>
+              <p class="pl-3">A quick guide to PGP can be found here: PGP
+                <a href="https://github.com/Gaff/pgp.help/blob/master/README.md">Help</a>
+              </p>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="auctionMinimumBid">Minimum Bid*</label>
+              <input type="number" class="form-control" id="auctionMinimumBid" min="0" placeholder="ex. 0.010000" step="0.01" autofill="off" required>
+              <div class="invalid-feedback" id="minimumBidError"></div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="auctionBuyOut">Buyout Price</label>
+              <input type="number" class="form-control" id="auctionBuyOut" min="0" placeholder="ex. 0.010000" aria-describedby="buyoutHelp" step="0.01"
+                autofill="off">
+              <small id="buyoutHelp" class="form-text text-muted">
+                NOTE: A buyout price is optional. If this field is left blank the highest bid that meets the minimum threshold will win the
+                auction when time expires.
+              </small>
+              <div class="invalid-feedback" id="buyoutError"></div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="row">
+            <div class="form-group col-md-2">
+              <label for="userPin">Your PIN*</label>
+              <input type="password" class="form-control" name="auctionUserPin" id="userPin" autocomplete="nope" value="" maxlength="6"
+                required>
+                <span class="invalid-feedback" id="pinError"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-orange">Submit for Review</button>
+        </form>
+      </div>
+    </div>
+    <!-- begin::Footer -->
+    <% include ../footer.ejs %>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+      <script src="/js/common/common.js" type="text/javascript"></script>
+      <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+      <script src="/js/auction/createAuction.js" type="text/javascript"></script>
+</body>
+
+</html>

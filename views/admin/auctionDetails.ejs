@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GREYRALLY | Admin</title>
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/admin/css/perfect-scrollbar.min.css" />
+<link rel="stylesheet" href="/admin/css/style.css"/>
+<link rel="shortcut icon" href="/images/favicon.png"/>
+<link rel="stylesheet" href="/css/sweetalert-1.1.3/sweetalert.min.css"  />
+
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="/admin/css/datatables.min.css">
+<!-- ========= -->
+
+</head>
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <% include ./navbar.ejs %>
+    <!--End navbar-->
+    <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <!-- SIDEBAR STARTS -->
+    <% include ./slidebar.ejs %>
+    <!-- SIDEBAR ENDS -->
+      <div class="content-wrapper">
+        <h3 class="text-primary mb-4">Dashboard</h3>
+        <% include ./header.ejs %>
+
+      <!-- BEGIN: BODY-->
+
+        <div class="card">
+          <div class="card-block">
+            <h5 class="card-title mb-4"><%= auction.name %></h5>
+            <br>
+            <br>
+            <table id="hackers" class="display" cellspacing="0" width="100%">
+              <tbody class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide _mCS_1" style="height: 325px; position: relative; overflow: visible;" data-scrollbar-shown="true">
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;">
+                <td class="m-datatable__cell--sorted m-datatable__cell auction_td4_width">Posted by</td>
+                <td class="m-datatable__cell--sorted m-datatable__cell"><%= auction.user%></td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Os</td>
+                <td><%=auction.os %></td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Type</td>
+                <td><%=auction.type %></td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Manufacturer</td>
+                <td><%=auction.manufacturer %></td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Additional Resources</td>
+                <td class="m-datatable__cell--sorted m-datatable__cell">
+                  <% if(auction.document != "") { %>
+                    <% for(let i=0; i<auction.document.length; i++) { %>
+                      <div>
+                      <a download="<%= auction.document[i].originalname %>" href="/uploads/<%= auction.document[i].filename %>">
+                        <strong>Download Resource</strong>
+                      </a>
+                    </div>
+                    <br>
+                    <% } %>
+                  <% } else { %>
+                    <span> No document uploaded. </span>
+                  <% } %>
+                </td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Current Highest Bid</td>
+                <td class="m-datatable__cell--sorted m-datatable__cell">
+                  <span id="currentBidBTC" style="color: blue; border-width: 1px; border-style: solid;">
+                    <%= auction.currentBid%> BTC
+                  </span>
+                </td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Minimum Bid</td>
+                <td class="m-datatable__cell--sorted m-datatable__cell">
+                  <span id="currentBidBTC" style="color: blue; border-width: 1px; border-style: solid;">
+                    <%= auction.minimumBid%> BTC
+                  </span>
+                </td>
+              </tr>
+
+              <% if(auction.buyoutPrice > 0) { %>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;">
+                  <td class="m-datatable__cell--sorted m-datatable__cell auction_td4_width">Buyout Price</td>
+                  <td class="m-datatable__cell--sorted m-datatable__cell" id="buyPrice">
+                    <span id="currentBidBTC" style="color: blue; border-width: 1px; border-style: solid;">
+                    <%= auction.buyoutPrice%> BTC
+                    </span>
+                  </td>
+                </tr>
+              <% } %>
+
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Listing Date</td>
+                <td><%=auction.listingDate %></td>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Expiration Countdown</td>
+                <% if(auction.status == 1) { %>
+                <input type="hidden" id="expiration" value="<%= auction.expirationDate %>">
+                <td class="m-datatable__cell--sorted m-datatable__cell">
+                  <div id="count-down" style="font-weight: bold; color: green">
+
+                  </div>
+                </td>
+                <% } else { %>
+                  <td class="m-datatable__cell--sorted m-datatable__cell" style="color:blue;"> Expired/Disabled </td>
+                <% } %>
+              </tr>
+              <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                <td>Summary</td>
+                <td><%=auction.description%></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+
+      <!-- =========== -->
+
+      </div>
+      <!-- begin::Footer -->
+      <% include ./footer.ejs %>
+      <!-- end::Footer -->
+    </div>
+  </div>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/off-canvas.js"></script>
+<script type="text/javascript" src="/admin/js/hoverable-collapse.js"></script>
+<script type="text/javascript" src="/admin/js/misc.js"></script>
+<script type="text/javascript" src="/admin/js/maps.js"></script>
+<script type="text/javascript" src="/js/jquery.countdown-2.2.0/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/js/sweetalert-1.1.3/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+  $("#count-down").countdown(Date.parse($('#expiration').val()), function(event) {
+    $(this).text(
+      event.strftime('%D days %H:%M:%S')
+    );
+  });
+</script>
+
+<script type="text/javascript">
+  $('#deleteIt').click(function(){
+    swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this imaginary file!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel plx!",
+      closeOnConfirm: false,
+      closeOnCancel: false
+    },
+    function(isConfirm) {
+      if (isConfirm) {
+        url = window.location.pathname;
+        let auction = url.split( '/' );
+        let auctionName = auction[4];
+        $.ajax({
+          type: "POST",
+          url: "/auctions/" + auctionName + "/delete",
+          success: function(response) {
+            swal({
+              title: "Success!",
+              text: "Redirecting in 2 seconds.",
+              type: "success",
+              timer: 2000,
+              showConfirmButton: false
+            }, function(){
+                window.location.href = "/admin/auctions";
+            });
+          },
+        });
+      } else {
+        swal("Canceled", "Your auction details are safe :)", "error");
+      }
+    }, 1000);
+  })
+</script>
+
+</body>
+</html>

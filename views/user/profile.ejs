@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- begin::Head -->
+
+<head>
+  <meta charset="UTF-8">
+  <title>GREYRALLY</title>
+  <meta name="description" content="Latest updates and statistic charts">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+  <!--end::Page Vendors -->
+  <link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+
+  <link href="/css/vendors.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+
+  <link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+  <link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+</head>
+<!-- end::Head -->
+
+<!-- end::Body -->
+
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+
+
+
+  <!-- begin:: Page -->
+  <div class="m-grid m-grid--hor m-grid--root m-page">
+
+    <!-- begin::Header -->
+    <% include ../header.ejs %>
+      <div class="modal fade " id="changeEmail" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content change-password-main">
+            <div class="modal-header">
+              <h5 class="modal-title">&nbsp;
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <form class="login-form" id="changemail" data-parsley-excluded="input[type=button], input[type=submit]" data-parsley-trigger="keyup"
+              data-parsley-validate="" role="form" novalidate>
+              <div class="modal-body ">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">New Email: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success" autocomplete="off" autofill="off" type="email" id="email" name="email"
+                      parsley-required="true">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">PIN :</label>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success custom-passwrd " autocomplete="off" autofill="off" id="pinEmail"
+                      type="password" name="PIN" maxlength="6" style="font-weight:400; width:125px;" data-parsley-type="digits"
+                      name="password" parsley-required="true" required>
+                    <span id="pinErr" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px">
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer bid-popup">
+                <button type="submit" class="btn btn-primary orange" id="changeMail" style="background-color:#e1e1e1!important" disabled>Submit</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade " id="changePIN" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content change-password-main">
+            <div class="modal-header">
+              <h5 class="modal-title">&nbsp;
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+
+            <form class="login-form" id="changepin" data-parsley-excluded="input[type=button], input[type=submit]" data-parsley-trigger="keyup"
+              data-parsley-validate="" role="form" novalidate>
+              <div class="modal-body ">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">Current Pin: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success custom-passwrd" type="password" maxlength="6" id="oldPIN" autocomplete="off"
+                      autofill="off" style="width:125px;" data-parsley-type="digits" name="oldPIN" parsley-required="true"
+                      required data-parsley-id="6">
+                    <span id="pinErr2" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">New 6 digit Pin: </label>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success custom-passwrd " type="password" maxlength="6" id="newPIN" autocomplete="off"
+                      autofill="off" style="width:125px;" data-parsley-type="digits" data-parsley-equalto="#newPIN" name="newPIN"
+                      parsley-required="true" required data-parsley-id="6">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">Confirm Pin: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success custom-passwrd " maxlength="6" id="cnfPIN" autocomplete="off" autofill="off"
+                      type="password" style="width:125px;" data-parsley-type="digits" data-parsley-equalto="#newPIN" name="cnfPIN"
+                      parsley-required="true" required data-parsley-id="6">
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer bid-popup">
+                <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <button type="submit" id="save" class="btn btn-primary" style="background-color:#e1e1e1!important" disabled>Submit</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade " id="changePass" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content change-password-main">
+            <div class="modal-header">
+              <h5 class="modal-title">&nbsp;
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <form class="login-form" data-parsley-excluded="input[type=button], input[type=submit]" data-parsley-trigger="keyup" id="changepw"
+              data-parsley-validate="" role="form" novalidate>
+              <div class="modal-body ">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">Current Password: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success" id="oldPwd" type="password" name="oldPwd" parsley-required="true">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">New Password: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success" id="newPwd" type="password" name="newPwd" parsley-required="true">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">Confirm Password: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success" id="cnfPwd" type="password" name="cnfPwd" parsley-required="true"
+                      data-parsley-equalto="#newPwd">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="bid">PIN: </label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input class="form-password form-control parsley-success custom-passwrd" maxlength="6" id="passPIN" type="password" data-parsley-type="digits"
+                      name="passPIN" parsley-required="true" style="width:125px;">
+                    <span id="pinErr3" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px">
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer bid-popup">
+                <button type="submit" class="btn btn-primary orange" id="changePwd">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEGIN: model change user's PGP public key ============================= -->
+      <div class="modal fade " id="changePGPmodel" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content change-password-main">
+            <div class="modal-header">
+              <h5 class="modal-title">&nbsp;
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <form class="login-form" id="changepgp" data-parsley-excluded="input[type=button], input[type=submit]" data-parsley-trigger="keyup"
+              data-parsley-validate="" role="form">
+              <div class="modal-body ">
+                <div class="row">
+                  <div class="col-md-2">
+                    <label>New PGP public key: </label>
+                  </div>
+                  <div class="form-group col-md-10">
+                    <textarea class="form-control" style="width: 350px; height: 200px" id="pgp" placeholder="Enter new PGP public key here..."
+                      name="pgp" required></textarea>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <label>PIN: </label>
+                  </div>
+                  <div class="form-group col-md-10">
+                    <input class="form-password form-control parsley-success custom-passwrd" maxlength="6" id="pgpPIN" autocomplete="off" autofill="off"
+                      type="password" data-parsley-type="digits" name="pgpPIN" parsley-required="true" style="width:125px;">
+                    <span id="pinErr4" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px">
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer bid-popup">
+                <button type="submit" class="btn btn-primary orange" id="changePGP">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Over : model change user's PGP public key ============================= -->
+
+
+      <!-- end::Header -->
+
+      <!-- begin::Body -->
+      <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        <!-- BEGIN: Left Aside -->
+        <button class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn">
+          <i class="la la-close"></i>
+        </button>
+
+        <!-- END: Left Aside -->
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+          <!-- BEGIN: Subheader -->
+          <div class="m-subheader ">
+            <div class="d-flex align-items-center">
+              <div class="mr-auto">
+                <h3 class="m-subheader__title ">Profile</h3>
+              </div>
+            </div>
+            <div class="col-xl-12">
+              <div class="m-portlet m-portlet--mobile ap-custom mt-4">
+                <div class="m-portlet__body profile-main">
+                  <div class="row">
+                    <div class="col-sm-9">
+                      <table width="40%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td>Username:</td>
+                          <td>
+                            <%= userInfo.userName %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Email Address:</td>
+                          <td>
+                            <span data-toggle="modal" data-target="#makeBid" id="email-text1" class="email-text1">
+                              <%= userInfo.email %>
+                            </span>
+                            <a href="#" data-toggle="modal" data-target="#changeEmail">change</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="col-sm-3 pull-right ">
+                      <table width="100%" border="0" cellpadding="0">
+                        <tr>
+                          <td>Auctions Sold:</td>
+                          <td>
+                            <%= created %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Auctions Bought:</td>
+                          <td>
+                            <%= bought %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Your Rating:</td>
+                          <td>
+                            <p style="">
+                              <% if (rating.userRating == undefined) { %>
+                                <span style="color:#F7921A; font-weight:400;">Not Yet Rated</span>
+                                <% } else {%>
+                                  <% for(let j = 1 ; j <= 5 ;j++) { %>
+                                    <% if ( j <= rating.userRating) { %>
+                                      <img alt="" src="/img/Rating<%=j%>_10x10.png">
+                                      <% } else { %>
+                                        <img alt="" src="/img/Rating0_10x10.png">
+                                        <% }  %>
+                                          <% } %>
+                                            <% }%>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="border-top">&nbsp;</div>
+                  <div class="row ">
+                    <div class="col-sm-9">
+                      <table width="40%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td>Your PIN:</td>
+                          <td>
+                            <a href="#" data-toggle="modal" data-target="#changePIN">Change</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Your Password:</td>
+                          <td>
+                            <a href="#" data-toggle="modal" data-target="#changePass">Change</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Public PGP Key:</td>
+                          <td>
+                            <div class="text-line" id="pgpInfo">
+                              <%= userInfo.pgp %>
+                            </div>
+                          </td>
+                          <td>
+                            <td>
+                              <a href="#" data-toggle="modal" data-target="#changePGPmodel">Change</a>
+                            </td>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- begin::Footer -->
+      <% include ../footer.ejs %>
+        <!-- end::Footer -->
+  </div>
+
+  <!-- end:: Page -->
+
+  <!-- begin::Scroll Top -->
+  <!-- <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300"> <i class="fa fa-angle-up"></i> </div> -->
+  <!-- end::Scroll Top -->
+  <!-- begin::Quick Nav -->
+
+  <!--begin::Base Scripts -->
+  <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/vendors.bundle.js"></script>
+  <script type="text/javascript" src="/js/scripts.bundle.js"></script>
+  <script type="text/javascript" src="/js/jquery.backstretch.min.js"></script>
+  <script type="text/javascript" src="/js/scripts.js"></script>
+  <script type="text/javascript" src="/js/parsley.js"></script>
+  <script type="text/javascript" src="/js/general.js"></script>
+  <script type="text/javascript" src="/js/common/common.js"></script>
+  <script type="text/javascript" src="/js/sweetalert-1.1.3/sweetalert.min.js"></script>
+  <!--end::Base Scripts -->
+
+
+
+  <script type="text/javascript">
+    $("#pinEmail, #email").keyup(function () {
+
+      //regrex ffor
+      let mailValidation =
+        /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+
+      if (($("#pinEmail").val().length == '6') &&
+        ($("#email").val()) &&
+        mailValidation.test($("#email").val())) {
+        $('#pinErr').text('');
+        $('#changeMail').prop("disabled", false);
+        $('#changeMail').css('background-color', '#F7921A');
+      } else {
+        $('#changeMail').prop("disabled", true);
+        $('#changeMail').css('background-color', '#808080d6');
+      }
+    })
+  </script>
+
+  <script type="text/javascript">
+    let $input2 = $('input');
+    $input2.keyup(function () {
+      if (($('#newPIN').val()) &&
+        ($('#cnfPIN').val())) {
+        $('#save').prop("disabled", false);
+        $('#save').css('background-color', '#F7921A');
+      } else {
+        $('#save').prop("disabled", true);
+        $('#save').css('background-color', '#E1E1E1');
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    let $register = $('#save');
+
+    $register.attr('disabled', true)
+    $input2.keyup(function () {
+      let pin = document.getElementById("oldPIN").value;
+      if ((!regexp1.test(pin)) && ($('#oldPIN').val().length == '6')) {
+        $('#pinErr2').text('');
+        if (($('#newPIN').val().length == "6") &&
+          ($('#newPIN').val() == $('#cnfPIN').val()) &&
+          ($('#cnfPIN').val().length == '6') &&
+          (!regexp1.test($('#newPIN').val())) && (!regexp1.test($('#cnfPIN').val()))) {
+          $('#pinErr2').text('');
+          $('#save').prop("disabled", false);
+          $('#save').css('background-color', '#F7921A');
+        } else {
+          $('#save').prop("disabled", true);
+          $('#save').css('background-color', '#808080d6');
+        }
+      } else {
+        $('#pinErr2').text('Pin should be 6 digit long.');
+        $('#save').prop("disabled", true);
+        $('#save').css('background-color', '#808080d6');
+        return false;
+      }
+    })
+  </script>
+
+
+  <script type="text/javascript">
+    let $input3 = $('input'),
+      $register2 = $('#changePwd');
+
+    $register2.attr('disabled', true)
+    $input3.keyup(function () {
+      let pin = document.getElementById("passPIN").value;
+      if ((!regexp1.test(pin)) && ($('#passPIN').val().length == '6')) {
+        $('#pinErr3').text('');
+
+        if (($('#newPwd').val()) &&
+          ($('#cnfPwd').val()) &&
+          ($('#cnfPwd').val() == $('#newPwd').val()) &&
+          ($('#oldPwd').val()) &&
+          (!regexp1.test(pin)) &&
+          ($('#passPIN').val().length == '6')) {
+          $('#pinErr3').text('');
+          $('#changePwd').prop("disabled", false);
+          $('#changePwd').css('background-color', '#F7921A');
+        } else {
+          $('#changePwd').prop("disabled", true);
+          $('#changePwd').css('background-color', '#808080d6');
+        }
+      } else {
+        $('#pinErr3').text('Pin should be 6 digit long.');
+        $('#changePwd').prop("disabled", true);
+        $('#changePwd').css('background-color', '#808080d6');
+        return false;
+      }
+    })
+  </script>
+
+  <script type="text/javascript">
+    let $input4 = $('input'),
+      $register3 = $('#changePGP');
+
+    $register3.attr('disabled', true)
+    $input4.keyup(function () {
+      if ($('#pgp').val() &&
+        $('#pinErr2').text() == '') {
+        $('#changePGP').prop("disabled", false);
+        $('#changePGP').css('background-color', '#F7921A');
+      } else {
+        $('#changePGP').prop("disabled", true);
+        $('#changePGP').css('background-color', '#E1E1E1');
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    let regexp1 = new RegExp("[^0-9]");
+    $("#pgpPIN").keyup(function () {
+      let pin = document.getElementById("pgpPIN").value;
+      if ((!regexp1.test(pin)) && ($('#pgpPIN').val().length == '6')) {
+        if ($("#pgpPIN").val()) {
+          $('#pinErr4').text('');
+          if ($('#pgp').val()) {
+            $('#changePGP').prop("disabled", false);
+            $('#changePGP').css('background-color', '#F7921A');
+          }
+        }
+      } else {
+        $('#pinErr4').text('IPin should be 6 digit long.');
+        $('#changePGP').prop("disabled", true);
+        $('#changePGP').css('background-color', '#808080d6');
+        return false;
+      }
+    })
+  </script>
+  <!-- Change Pin  -->
+  <script type="text/javascript">
+    $("#changepin").submit(function (e) {
+      return false;
+    });
+
+    $("#save").click(function () {
+      let url = "/users/" + document.getElementById("userId").innerHTML + "/change-PIN"
+      $.ajax({
+        type: "POST",
+        data: {
+          "oldPIN": $("#oldPIN").val(),
+          "newPIN": $("#newPIN").val(),
+          "cnfPIN": $("#cnfPIN").val()
+        },
+        url: url,
+        success: function (response) {
+          console.log("RESPONSE for Change PIN: ", response);
+          if (response == 1) {
+            // Change Pin Success
+            $("#changePIN").find(".modal-content").children().hide();
+            let changePINSuccess =
+              `<div id="changePINResponse"><br/><center><img src="/img/OrangeCheck_32x32.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">You PIN has changed.</p> </center></div>`;
+            $("#changePIN").find(".modal-content").append(changePINSuccess);
+          } else if (response == 2) {
+            // New pin and confirm pin not match
+            $("#changePIN").find(".modal-content").children().hide();
+            let changePINFail2 =
+              `<div id="changePINResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">New pin and confirm pin must be same and should be 6 digit long.</p> </center></div>`;
+            $("#changePIN").find(".modal-content").append(changePINFail2);
+          } else {
+            // Incorrect pin
+            $("#changePIN").find(".modal-content").children().hide();
+            let changePINFail =
+              `<div id="changePINResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Incorrect PIN.</p> </center></div>`;
+            $("#changePIN").find(".modal-content").append(changePINFail);
+          }
+        },
+      });
+    })
+
+    $("#changePIN").on('hidden.bs.modal', function () {
+      $(this).find("#changePINResponse").remove();
+      $(this).find(".modal-content").children().show();
+    });
+  </script>
+  <!-- Change Pass  -->
+  <script type="text/javascript">
+    $("#changepw").submit(function (e) {
+      return false;
+    });
+
+    $("#changePwd").click(function () {
+
+      let url = "/users/" +
+        document.getElementById("userId").innerHTML +
+        "/change-password";
+
+      $.ajax({
+        type: "POST",
+        data: {
+          "oldPwd": $("#oldPwd").val(),
+          "newPwd": $("#newPwd").val(),
+          "passPIN": $("#passPIN").val(),
+          "cnfPwd": $("#cnfPwd").val()
+        },
+        url: url,
+        success: function (response) {
+          if (response == 1) {
+            //password successfully changed
+            $("#changePass").find(".modal-content").children().hide();
+            let changePassSuccess =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeCheck_32x32.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Your Password has successfully been changed.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(changePassSuccess);
+          } else if (response == 2) {
+            // New Pass and confirm Pass not match
+            $("#changePass").find(".modal-content").children().hide();
+            let changePassFail2 =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">New Pass and confirm Pass must be same.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(changePassFail2);
+          } else if (response == 3) {
+            //Pin Incorrect
+            $("#changePass").find(".modal-content").children().hide();
+            let pinIncorrect =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Pin Incorrect.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(pinIncorrect);
+          } else if (response == 4) {
+            //Password should be 8 characters  & special character
+            $("#changePass").find(".modal-content").children().hide();
+            let changePassFail =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Password should be 8 characters long with atleast 1 special character.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(changePassFail);
+          } else if (response == 0) {
+            //Incorrect Old Iwd
+            $("#changePass").find(".modal-content").children().hide();
+            let changePassFail =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Incorrect old password.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(changePassFail);
+          } else {
+            //Something went wrong
+            $("#changePass").find(".modal-content").children().hide();
+            let changePassFail =
+              `<div id="changePwdResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Something went Wrong.</p> </center></div>`;
+            $("#changePass").find(".modal-content").append(changePassFail);
+          }
+        },
+      });
+    })
+
+    $("#changePass").on('hidden.bs.modal', function () {
+      $(this).find("#changePwdResponse").remove();
+      $(this).find(".modal-content").children().show();
+    });
+  </script>
+  <!-- Change PGP -->
+  <script type="text/javascript">
+    $("#changepgp").submit(function (e) {
+      return false;
+    });
+
+    $("#changePGP").click(function () {
+
+      let url = "/users/" +
+        document.getElementById("userId").innerHTML +
+        "/change-PGP";
+
+      $.ajax({
+        type: "POST",
+        data: {
+          "pgp": $("#pgp").val(),
+          "pgpPIN": $("#pgpPIN").val(),
+        },
+        url: url,
+        success: function (response) {
+          if (response == 1) {
+            // PGP Successfully change
+            $("#changePGPmodel").find(".modal-content").children().hide();
+            let changePGPmodelSuccess =
+              `<div id="changePGPResponse"><br/><center><img src="/img/OrangeCheck_32x32.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Your PGP key has been changes successfully.</p> </center></div>`;
+            $("#changePGPmodel").find(".modal-content").append(changePGPmodelSuccess);
+            document.getElementById("pgpInfo").innerHTML = $("#pgp").val()
+          } else if (response == 2) {
+            //Pin Incorrect
+            $("#changePGPmodel").find(".modal-content").children().hide();
+            let pinIncorrect =
+              `<div id="changePGPResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Pin Incorrect.</p> </center></div>`;
+            $("#changePGPmodel").find(".modal-content").append(pinIncorrect);
+          } else if (response == 3) {
+            // SPGP is required
+            $("#changePGPmodel").find(".modal-content").children().hide();
+            let changePGPmodelFail3 =
+              `<div id="changePGPResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">PGP is required.</p> </center></div>`;
+            $("#changePGPmodel").find(".modal-content").append(changePGPmodelFail3);
+          } else {
+            // Something Went wrong
+            $("#changePGPmodel").find(".modal-content").children().hide();
+            let changePGPmodelFail2 =
+              `<div id="changePGPResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Something went wrong.</p> </center></div>`;
+            $("#changePGPmodel").find(".modal-content").append(changePGPmodelFail2);
+          }
+        },
+      });
+    })
+
+    $("#changePGPmodel").on('hidden.bs.modal', function () {
+      $(this).find("#changePGPResponse").remove();
+      $(this).find(".modal-content").children().show();
+    });
+  </script>
+  <!-- Change EMAIL -->
+  <script type="text/javascript">
+    $("#changemail").submit(function (e) {
+      return false;
+    });
+
+    $("#changeMail").click(function () {
+
+      let url = "/users/" +
+        document.getElementById("userId").innerHTML +
+        "/change-email";
+
+      $.ajax({
+        type: "POST",
+        data: {
+          "email": $("#email").val(),
+          "PIN": $("#pinEmail").val(),
+        },
+        url: url,
+        success: function (response) {
+          if (response == 1) {
+            // PGP Successfully change
+            $("#changeEmail").find(".modal-content").children().hide();
+            let changeEmailSuccess =
+              `<div id="changeEmailResponse"><br/><center><img src="/img/OrangeCheck_32x32.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">You email has changed..</p> </center></div>`;
+            $("#changeEmail").find(".modal-content").append(changeEmailSuccess);
+            document.getElementById("email-text1").innerHTML = $("#email").val()
+          } else if (response == 2) {
+            //Pin Incorrect
+            $("#changeEmail").find(".modal-content").children().hide();
+            let pinIncorrect =
+              `<div id="changeEmailResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Pin Incorrect.</p> </center></div>`;
+            $("#changeEmail").find(".modal-content").append(pinIncorrect);
+          } else {
+            // Something Went wrong
+            $("#changeEmail").find(".modal-content").children().hide();
+            let changeEmailFail2 =
+              `<div id="changeEmailResponse"><br/><center><img src="/img/OrangeX.png"><p style="font-size: 15px; color: #797979;margin-left: 10px;">Something went wrong.</p> </center></div>`;
+            $("#changeEmail").find(".modal-content").append(changeEmailFail2);
+          }
+        },
+      });
+    })
+
+    $("#changeEmail").on('hidden.bs.modal', function () {
+      $(this).find("#changeEmailResponse").remove();
+      $(this).find(".modal-content").children().show();
+    });
+  </script>
+
+
+</body>
+<!-- end::Body -->
+
+</html>

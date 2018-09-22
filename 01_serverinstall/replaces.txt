@@ -1,0 +1,14 @@
+
+
+============================================
+           EDIT SCRIPT IN VI
+		  FILL IN / COPY PASTE
+		  TO SETUP ENVIRONMENT
+============================================
+
+
+%s/<HOSTUSER>/your non-root user for the site/g
+%s/<GITUSERNAME>/your username/g
+%s/<GITEMAIL>/your@email.com/g
+%s/<GITPASSWORD>/your git password token/g
+

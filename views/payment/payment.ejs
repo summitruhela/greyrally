@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <!-- CSS-->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/form-elements.css">
+  <link rel="stylesheet" href="css/vendors.bundle.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.bundle.css" type="text/css" />
+  <link rel="stylesheet" href="css/reset.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <!-- Favicon and touch icons-->
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+</head>
+
+<body>
+  <!-- Top content-->
+  <div class="top-content">
+    <div class="inner-bg">
+      <div class="container">
+
+
+
+        <div class="row row-eq-height pay-form-top">
+
+
+          <div class="col-sm-4 col-sm-offset-2 form-box left-box" style="padding:0">
+
+            <div class="inner-left">
+
+              <a class="" href="/">
+                <img alt="" src="/img/logo.png">
+              </a>
+
+              <p>The worlds first open,
+                <br /> transparent
+                <br /> vulnerability market.</p>
+            </div>
+
+          </div>
+
+          <div class="col-sm-4 form-box" style="padding:0">
+            <div class="form-bottom">
+              <div class="modal-body payment-title">
+                <h3>Payment Options</h3>
+
+                <div id="myTabContent" class="tab-content">
+                  <div class="tab-pane active login-main in" id="login">
+                    <form class="login-form" role="form" action="/payment" method="post">
+                      <div class="form-group">
+
+                        <input class="form-username form-control" type="text" name="company_name" placeholder="Company Name" id="">
+                      </div>
+                      <div class="form-group">
+
+                        <input class="form-password form-control" type="text" name="preferences" placeholder="Preference Keywords" id="">
+                      </div>
+
+                      <div class="form-group payment-btn">
+
+                        <form action="/" method="POST">
+                          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh" data-amount="999"
+                            data-name="Stripe.com" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto" data-zip-code="true">
+                          </script>
+                        </form>
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+
+                          <div class="col-md-12 col-sm-12">
+                            <a href="/login">
+                              <button class="btn submit paybtn-last" id="loginUser" type="submit" disabled>Dispute</button>
+
+
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+
+                    <div class="form-group text-center">
+                      <p>Already Have an Account?
+                        <a href="signin" class="unerline">Login</a>
+                      </p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <!-- Javascript-->
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/parsley.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" src="js/general.js"></script>
+  <script type="text/javascript" src="js/payment/payment.js"></script>
+  <!-- ======= -->
+</body>
+
+</html>

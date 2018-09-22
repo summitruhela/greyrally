@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GREYRALLY | Admin</title>
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/admin/css/perfect-scrollbar.min.css" />
+<link rel="stylesheet" href="/admin/css/style.css"/>
+<link rel="shortcut icon" href="/images/favicon.png"/>
+<link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="/admin/css/datatables.min.css">
+<!-- ========= -->
+
+</head>
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <% include ./navbar.ejs %>
+    <!--End navbar-->
+    <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <!-- SIDEBAR STARTS -->
+    <% include ./slidebar.ejs %>
+    <!-- SIDEBAR ENDS -->
+      <div class="content-wrapper">
+        <h3 class="text-primary mb-4">Dashboard</h3>
+        <% include ./header.ejs %>
+
+        <!-- BEGIN: BODY-->
+
+        <div class="card">
+          <div class="card-block">
+            <h5 class="card-title mb-4">Admin - Settings </h5>
+            <div class="row">
+              <div class="col-md-3">
+                <form method="post" action="/admin/change-settings" data-parsley-excluded="input[type=button], input[type=submit], input[type=reset], input[type=checkbox], input[type=hidden], [disabled], :hidden" data-parsley-trigger="keyup" data-parsley-validate role="form">
+                  <div class="form-group">
+                    <div>
+                      Commission(% of auction price):
+                    </div>
+                    <div class="input-group">
+                      <input type="number" name="commission" class="form-control p_input" placeholder="admin commission" value="<%= config.commission %>" step="0.000001" data-parsley-errors-container=".errorspanpassinput" data-parsley-required="">
+                    </div>
+                    <span class="errorspanpassinput"></span>
+                  </div>
+                  <div>
+                    Transaction Fee(BTC)*
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="number" name="transactionCharge" value="<%= config.transactionCharge %>"" class="form-control p_input" step="0.000001" placeholder="transaction fee"  data-parsley-errors-container=".errorspannewpassinput" data-parsley-required="">
+                    </div>
+                    <span class="errorspannewpassinput"></span>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- =========== -->
+
+      </div>
+      <!-- begin::Footer -->
+      <% include ./footer.ejs %>
+      <!-- end::Footer -->
+    </div>
+  </div>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/off-canvas.js"></script>
+<script type="text/javascript" src="/admin/js/hoverable-collapse.js"></script>
+<script type="text/javascript" src="/admin/js/misc.js"></script>
+<script type="text/javascript" src="/admin/js/maps.js"></script>
+<script type="text/javascript" src="/js/parsley.js"></script>
+
+</body>
+</html>

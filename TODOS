@@ -1,0 +1,15 @@
+
+ * Uncomment transaction method on all the transactions point.
+ * Before goes to production.
+   1. Default admin entry.
+   2. Default wallet.
+   3. Default BTC address(Both, public and private).
+   4. DB username-password.
+   5. Daily DB-backup.
+   6. Backup BTC addresses of users.(lost of private key from DB will be lost of entire BITCOIN. There is no other way to recover it.
+   7. Set NODE_ENV to "production".
+       Setting NODE_ENV to “production” makes Express:
+        Cache view templates.
+        Cache CSS files generated from CSS extensions.
+        Generate less verbose error messages.
+   8. Add IE killer

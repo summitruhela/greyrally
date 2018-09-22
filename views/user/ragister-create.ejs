@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<!-- CSS-->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/form-elements.css">
+<link rel="stylesheet" href="/css/style.css">
+<link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+<!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+<!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+<!-- Favicon and touch icons-->
+<link rel="shortcut icon" href="img/favicon.png">
+</head>
+<body style="background:#e1e1e1;">
+<!-- Top content-->
+<div class="top-content">
+  <div class="inner-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text">
+
+          <!--  <h1><strong>Please Login to Continue</strong></h1>
+
+              <div class="description">
+              <p>This is a free responsive login form made with Bootstrap.</p>
+              </div>
+              -->
+        </div>
+      </div>
+      <div class="row row-eq-height login-form-top">
+
+
+        <div class="col-sm-4 col-sm-offset-1 form-box left-box" style="padding:0">
+
+        <div class="inner-left">
+
+       <a class="" href="/"><img alt="" src="/img/logo.png"></a>
+
+        <p>The worlds first open, <br />
+transparent <br />
+vulnerability market.</p> </div>
+
+        </div>
+
+        <div class="col-sm-6 form-box" style="padding:0">
+          <div class="form-bottom thank-you">
+
+            <h2>Thanks! <br />
+You’re almost there.</h2>
+            <p>Please look for an email from GREYRALLY<br />
+to verify your account.</p>
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Javascript-->
+<!--<script src="js/jquery-1.11.1.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/parsley.js"></script>
+<script src="js/general.js"></script>
+<!--if lt IE 10script(src='assets/js/placeholder.js')
+    -->
+<script type="text/javascript">
+  let $input = $('input'),
+      $login = $('#loginUser');
+
+  $login.attr('disabled', true)
+  $input.keyup(function() {
+    let trigger = false;
+    $input.each(function() {
+      if (!$(this).val()) {
+        trigger = true;
+      }
+    });
+    if(($('#usernameLogin').val()) && ($('#pwd').val())) {
+      $('#loginUser').prop("disabled", false);
+      $('#loginUser').css('background-color', '#F7921A');
+    } else {
+      $('#loginUser').prop("disabled", true);
+      $('#loginUser').css('background-color', '#e1e1e1');
+    }
+  });
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $(".popover-message").on("mouseover", function() {
+    $(this).siblings("span.iconed-info").show();
+  });
+  $(".popover-message").on("mouseout", function() {
+    $(this).siblings("span.iconed-info").hide();
+  });
+});
+
+</script>
+
+
+
+</body>
+</html>
+
+

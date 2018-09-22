@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GREYRALLY | Admin</title>
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/admin/css/perfect-scrollbar.min.css" />
+<link rel="stylesheet" href="/admin/css/style.css"/>
+<link rel="shortcut icon" href="/images/favicon.png"/>
+
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="/admin/css/datatables.min.css">
+<!-- ========= -->
+
+</head>
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <% include ./navbar.ejs %>
+    <!--End navbar-->
+    <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <!-- SIDEBAR STARTS -->
+    <% include ./slidebar.ejs %>
+    <!-- SIDEBAR ENDS -->
+      <div class="content-wrapper">
+        <h3 class="text-primary mb-4">Dashboard</h3>
+        <% include ./header.ejs %>
+        <div class="card">
+          <div class="card-block">
+            <h5 class="card-title mb-4">Users</h5>
+            <table id="hackers" class="display" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Active Auctions</th>
+                  <!-- <th>Tier</th> -->
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <!-- begin::Footer -->
+      <% include ./footer.ejs %>
+      <!-- end::Footer -->
+    </div>
+  </div>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/off-canvas.js"></script>
+<script type="text/javascript" src="/admin/js/hoverable-collapse.js"></script>
+<script type="text/javascript" src="/admin/js/misc.js"></script>
+<script type="text/javascript" src="/admin/js/maps.js"></script>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> -->
+<script type="text/javascript" src="/admin/js/datatables.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#hackers').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        url: "/admin/userList",
+        type: "post"
+      },
+      "columns": [
+        {"data": "userName",
+          render: function ( data, type, row ) {
+            return '<a href="/admin/users/'+row.userName+'/profile">'+row.userName+'</a>';
+          },
+        },
+        {"data": "email"},
+        {"data": "activeAuctions"},
+        // {"data": "tier"},
+        {"data": "role",
+          render: function ( data, type, row ) {
+            if ( row.role == '2' ) {
+              return '<span>Hacker</span>';
+            } else {
+              return '<span>Company</span>';
+            }
+          },
+        },
+        {"data": "status",
+          render: function ( data, type, row ) {
+            if ( row.status == '1' ) {
+              return '<span class="badge badge-success">Active</span>';
+            } else {
+              return '<span class="badge badge-danger">Inactive</span>';
+            }
+          },
+        },
+        { "data": "action",
+          "sortable": false,
+          render: function ( data, type, row ) {
+            if ( row.status == '1' ) {
+              return '<a href="/admin/users/'+row.userName+'/disable" class="btn btn-sm btn-danger">Disable</a>';
+            } else {
+              return '<a href="/admin/users/'+row.userName+'/enable" class="btn btn-sm btn-success"> Enable</a>';
+            }
+          },
+        }
+      ],
+    });
+  });
+</script>
+
+</body>
+</html>

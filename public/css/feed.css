@@ -1,0 +1,74 @@
+.auctions-wrapper {
+    margin-top: 100px;
+}
+
+.auction-title {
+    color: #656565;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.pre-follow {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.pre-follow:hover {
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.5);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.5);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.5);
+    transition: all 200ms ease-in;
+    transform: scale(1.5);
+}
+
+.card:hover .pre-follow {
+    opacity: 1;
+}
+
+.pre-follow a{
+    color:#656565;
+    font-size: 1.125rem;
+}
+
+.post-follow i{
+    color: #c0392b;
+    font-size: 1.5625rem;
+}
+
+.bitcoin {
+    color: #F7921A;
+    font-weight: normal;
+    font-size: 1.25rem;
+}
+
+.gr-score .score-highlight {
+    color: #F7921A;
+    font-size: 1.25rem;
+}
+
+.card-label {
+    font-size: 0.875rem;
+    color: rgba(101, 101, 101, 0.75);
+}
+
+.view-auction {
+    background-color: #F7921A;
+    color: #ffffff;
+}
+
+.view-auction:hover {
+    color: #282B3B;
+}
+
+.card {
+    transition: box-shadow 0.3s linear;
+}
+
+.card:hover {
+    box-shadow: 0 1rem 3rem #282B3B;
+    cursor: pointer;
+}
+

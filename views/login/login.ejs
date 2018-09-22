@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/loginPage.css">
+  <link rel="stylesheet" href="/css/globalStyles.css">
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+  <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+  <!-- Favicon and touch icons-->
+  <link rel="shortcut icon" href="img/favicon.png">
+</head>
+
+<body>
+  <!-- Top content-->
+    <div class="container form-holder">
+      <div class="row h-100 justify-content-center">
+        <div class="col-md-4 col-sm-6 logo-holder text-center">
+          <div class="logo">
+            <a class="" href="/">
+              <img alt="" src="/img/logo.png">
+            </a>
+            <p class="tag-line">The world's first open, transparent vulnerability market.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 form-box">
+          <div class="form-bottom">
+            <div class="modal-body">
+              <span class="mb-2" id="loginUl">Need an account? <a id="register">Register</a></span>
+              <span class="mb-2" id="createUl" style="display: none">Already have an account? <a id="login">Login</a></span>
+              <div id="myTabContent" class="tab-content">
+                <div class="login-main in" id="login">
+                  <form class="login-form form-horizontal" role="form" action="/login" method="post" data-parsley-excluded="input[type=button], input[type=submit], input[type=reset], input[type=checkbox], input[type=hidden], [disabled], :hidden"
+                    data-parsley-trigger="keyup" data-parsley-validate>
+                    <% if (err.length || success.length) { %>
+                      <% if(err.length) { %>
+                        <div class="alert alert-danger">
+                          <%= err %>
+                        </div>
+                        <% } else if(success.length) { %>
+                          <div class="alert alert-success">
+                            <%= success %>
+                          </div>
+                          <% } else { %>
+                            <div> </div>
+                            <% } %>
+                              <% } %>
+
+                                <div class="form-group">
+                                  <input autocomplete="off" autofill="off" class="form-username form-control" id="usernameLogin" type="text" name="username"
+                                    placeholder="Username/Email" parsley-required="true" required>
+                                </div>
+                                <div class="form-group">
+                                  <input class="form-password form-control" id="pwd" autocomplete="off" autofill="off" type="password" name="password" placeholder="Password"
+                                    parsley-required="true" required>
+                                </div>
+
+                                <div class="form-group text-right">
+                                  <span class="forgot-password">Forgot Password? <a href="/reset-password" class="line01">Reset</a></span>
+                                </div>
+                                <button class="btn submit btn-lg btn-block" id="loginUser" type="submit" disabled>Log In</button>
+                  </form>
+                </div>
+
+                <div class="sign-main" id="create" style="display: none;">
+                  <form class="login-form" id="tab" data-parsley-excluded="input[type=button], input[type=submit], input[type=reset], input[type=checkbox], input[type=hidden], [disabled], :hidden"
+                    data-parsley-trigger="blur" id="signupFrom" autocomplete="off" data-parsley-validate role="form" action="/signup"
+                    method="POST">
+
+                    <div class="form-group">
+                      <input type="text" name="username" placeholder="Username" autocomplete="off" autofill="off" id="usernameSignup" class="form-control form-username"
+                        required>
+                      <img id="usernameGif" style="display: none;" src="/img/30.gif">
+                      <span id="usernameErr" style="color:#de995e; font-weight: 400;font-size: 14px;letter-spacing: 1px"></span>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-username form-control" id="email" type="email" name="email" placeholder="Email" parsley-required="true"
+                        parsley-type="email" required>
+                      <span class="errorspannewemailinput"></span>
+                      <img id="emailGif" style="display: none;" src="/img/30.gif">
+                      <span id="emailErr" style="color:#de995e; font-weight: 400;font-size: 14px;letter-spacing: 1px"></span>
+                    </div>
+                    <div class="form-group">
+                      <input class="password form-control" id="password1" name="password" type="password" autofill="off" autocomplete="new-password"
+                        data-parsley-minlength="8" data-parsley-errors-container=".errorspannewpassinput" data-parsley-required-message="Please enter your new password."
+                        data-parsley-uppercase="1" data-parsley-lowercase="1" data-parsley-special="1" data-parsley-required=""
+                        placeholder="New Password">
+                      <span class="errorspannewpassinput"></span>
+                    </div>
+                    <div class="form-group mb5">
+                      <input class="password form-control" id="password2" type="password" autofill="off" name="Password2" autocomplete="new-password"
+                        data-parsley-minlength="8" data-parsley-errors-container=".errorspanconfirmnewpassinput" data-parsley-required-message="Please re-enter your new password."
+                        placeholder="Confirm Password " data-parsley-equalto="#password1" data-parsley-required="">
+                      <span class="errorspanconfirmnewpassinput"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pin">PIN: <i class="fa fa-question-circle pin-tooltip" aria-hidden="true"><span class="pin-tooltipText">GREYRALLY requires two-factor authentication. This six digit PIN will be needed for certain actions (e.g. creating an auction,bidding).</span></i></label>
+                        <input type="password" id="pin" maxlength = "6" name="pin" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="PGP Key">PGP Key: <i class="fa fa-question-circle pgp-tooltip" aria-hidden="true"><span class="pgp-tooltipText">A PGP public key is used to encrypt data between GREYRALLY and you (e.g. downloading the payload of a won auction). You need to keep the corresponding private key to decrypt data.</span></i></label>
+                      <textarea class="password form-control height100" name="pgp" id="PGP" data-parsley-required=""></textarea>
+                    </div>
+
+                    <div class="form-group mb6 text-right ">
+                      <span class="need-key">Need a key? Create one <a href="https://pgpkeygen.com" target="_blank" rel="noopener">here</a>.</span>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="role" id="seller" value="seller" checked>
+                      <label class="form-check-label" for="seller">Seller</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="role" id="buyer" value="buyer">
+                      <label class="form-check-label" for="buyer">Buyer</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" name="confirmation" id="confirmation" value="confirmation"
+                        />
+                        <label for="confirmation" class="form-check-label">I have read and agree to GREY RALLY’S Privacy Policy and Terms of Service.</label>
+                    </div>
+
+                    <button class="btn submit btn-lg btn-block" id="save" type="submit">Create</button>
+
+                    <div class="form-group privacy-terms mt-5">
+                      <a href="/policy">Privacy Policy</a>
+                      <a href="/terms-conditions">Terms of Service</a>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="login-botton text-center">
+        </div>
+      </div>
+    </div>
+
+
+  <!-- Javascript-->
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="js/parsley.js"></script>
+  <script src="js/general.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      var checkLoginStats = window.setInterval(function () {
+        var hasUsernameValue = $("#usernameLogin").val().length > 0; //Normal
+        var hasPasswordValue = $("#pwd").val().length > 0; //Normal
+        if (!hasUsernameValue) {
+          hasUsernameValue = $("#usernameLogin:-webkit-autofill").length > 0; //Chrome
+        }
+        if (!hasPasswordValue) {
+          hasPasswordValue = $("#pwd:-webkit-autofill").length > 0; //Chrome
+        }
+
+        if (hasUsernameValue) {
+          $('#usernameLogin').trigger('change');
+        }
+
+        if (hasPasswordValue) {
+          $('#pwd').trigger('change');
+        }
+
+        if (hasPasswordValue && hasUsernameValue) {
+          $("#loginUser").attr("disabled", false);
+          $('#loginUser').css('background-color', '#F7921A');
+          $('#loginUser').css('color', '#FFFFFF');
+          window.clearInterval(checkLoginStats);
+        }
+      }, 333);
+    });
+  </script>
+
+  <script type="text/javascript">
+    let $input = $('input'),
+      $login = $('#loginUser');
+
+    $login.attr('disabled', true)
+
+    $input.keyup(function () {
+      let trigger = false;
+      $input.each(function () {
+        if (!$(this).val()) {
+          trigger = true;
+        }
+      });
+      $($input).keyup(function () {
+        if (($('#usernameLogin').val()) && ($('#pwd').val())) {
+          $('#loginUser').prop("disabled", false);
+          $('#loginUser').css('background-color', '#F7921A');
+          $('#loginUser').css('color', '#FFFFFF');
+        } else {
+          $('#loginUser').prop("disabled", true);
+          $('#loginUser').css('background-color', '#e1e1e1');
+        }
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $("#register").click(function () {
+      $("#loginUl").css("display", "none");
+      $("#createUl").css("display", "inline-block");
+      $("div#login").css("display", "none");
+      $("div#create").css("display", "block");
+    });
+    $("#login").click(function () {
+      $("#loginUl").css("display", "inline-block");
+      $("#createUl").css("display", "none");
+      $("div#login").css("display", "block");
+      $("div#create").css("display", "none");
+    });
+  </script>
+
+  <script type="text/javascript">
+    let $input2 = $('input'),
+      $register = $('#save');
+    $register.attr('disabled', true)
+    $("input, #PGP").keyup(function () {
+      if (($('#password1').val()) &&
+        ($('#password2').val()) &&
+        ($('#usernameSignup').val()) &&
+        ($('#email').val()) &&
+        ($('#password1').val() == $('#password2').val()) &&
+        ($('#PGP').val()) &&
+        ($('#pin').val().length == '6') &&
+        ($('#usernameErr').text() == '') &&
+        ($('.errorspanconfirmnewpassinput').is(':empty')) &&
+        ($('.errorspannewpassinput').is(':empty')) &&
+        ($('#emailErr').text() == '') &&
+        ($('#pin').val()) &&
+        ($("input[name='confirmation']:checked").length != "0")) {
+        $('#save').prop("disabled", false);
+        $('#save').css('background-color', '#F7921A');
+      } else {
+        $('#save').prop("disabled", true);
+        $('#save').css('background-color', '#E1E1E1');
+      }
+    });
+
+    $("#password2").keyup(function () {
+      $(".errorspanconfirmnewpassinput").empty();
+      if ($('#password1').val() != $('#password2').val()) {
+        var passMissmatchErr =
+          "<ul class='parsley-errors-list filled' id='parsley-id-16'><li class='parsley-equalto'>This value should be the same.</li></ul>";
+        $(".errorspanconfirmnewpassinput").append(passMissmatchErr);
+      } else {
+        $(".errorspanconfirmnewpassinput").empty();
+      }
+    });
+
+    $("#password1").keyup(function () {
+      $(".errorspanconfirmnewpassinput").empty()
+      $(".errorspannewpassinput").empty();
+      // CHECK SPECIAL CHARECTER AND LENGTH IN PASSWORD
+      var format = /[^A-Za-z0-9]/;
+      if ($('#password1').val().length < 8) {
+        var shortPassword =
+          "<ul class='parsley-errors-list filled' id='parsley-id-16'><li class='parsley-equalto'>This value is too short. It should have 8 characters or more.</li></ul>";
+        $(".errorspannewpassinput").html(shortPassword);
+      } else if (!format.test($('#password1').val())) {
+        var missingSpecialChar =
+          "<ul class='parsley-errors-list filled' id='parsley-id-16'><li class='parsley-equalto'>Your password must contain at least (1) special characters.</li></ul>";
+        $(".errorspannewpassinput").append(missingSpecialChar);
+      } else if ($('#password1').val() != $('#password2').val()) {
+        var passMissmatchErr =
+          "<ul class='parsley-errors-list filled' id='parsley-id-16'><li class='parsley-equalto'>This value should be the same.</li></ul>";
+        $(".errorspanconfirmnewpassinput").append(passMissmatchErr);
+      } else {
+        $(".errorspannewpassinput").empty();
+      }
+    });
+
+    $("input[type='checkbox']").change(function () {
+
+      if (($('#password1').val()) &&
+        ($('#password2').val()) &&
+        ($('#usernameSignup').val()) &&
+        ($('#email').val()) &&
+        ($('#password1').val() == $('#password2').val()) &&
+        ($('#PGP').val()) &&
+        ($('#pin').val().length == '6') &&
+        ($('#usernameErr').text() == '') &&
+        ($('.errorspanconfirmnewpassinput').is(':empty')) &&
+        ($('.errorspannewpassinput').is(':empty')) &&
+        ($('#emailErr').text() == '') &&
+        ($('#pin').val()) &&
+        ($("input[name='confirmation']:checked").length != "0")) {
+        $('#save').prop("disabled", false);
+        $('#save').css('background-color', '#F7921A');
+      } else {
+        $('#save').prop("disabled", true);
+        $('#save').css('background-color', '#E1E1E1');
+      }
+    })
+
+    $("#pin").keyup(function () {
+      var format = /[^0-9]/;
+      $('#pinErr').empty();
+      if ($('#pin').val().length != '6') {
+        document.getElementById("pinErr").innerHTML = "This pin length is invalid. It should be 6 characters long."
+      } else if (format.test($('#pin').val())) {
+        document.getElementById("pinErr").innerHTML = "This value should be digits."
+      } else {
+        document.getElementById("pinErr").innerHTML = "";
+      }
+    });
+
+        $("#email").keyup(function () {
+      $(".errorspannewemailinput").empty(); 
+      var format = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+      $('#email').empty();
+      if (!format.test($('#email').val()) && $('#email').val().length >= 1) {
+        document.getElementById("emailErr").innerHTML = "Email id is not valid."
+      } else {
+        document.getElementById("emailErr").innerHTML = "";
+      }
+    });
+    
+
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- begin::Head -->
+
+<head>
+  <meta charset="utf-8" />
+  <title>GREYRALLY</title>
+  <meta name="description" content="Latest updates and statistic charts">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <!--end::Web font -->
+  <!--[if IE]>
+<meta http-equiv="refresh" content="0;URL='internetexplorer'" />  
+<![endif]-->
+  <link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="/css/landing.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  <link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+
+</head>
+
+<body>
+    <% include ./new-header.ejs %>
+    <div class="container-fluid my-4">
+      <div class="row">
+        <% if(hotAuctions.length) { %>
+          <% for(let i=0; i<hotAuctions.length; i++) { %>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-3 mb-4">
+                <div class="card rounded" data-auction-href="/users/<%= hotAuctions[i].name%>/login-status" onclick="location.href=$(this).data('auction-href')">
+                  <div class="card-body d-flex flex-column">
+                      <div class="mb-3"><span class="auction-title"><% if(hotAuctions[i].name.length < 20){ %> <%= hotAuctions[i].name %> <% } else { %><%= hotAuctions[i].name.substr(0,15)+'...' %><% } %></span>
+                        <span class="float-right pre-follow">
+                          <a href="/auction/<%= hotAuctions[i].name %>/preFollow">
+                            <i class="far fa-heart"></i>
+                          </a>
+                        </span>
+                      </div>
+                      <div class="expires-in"><span class="float-left card-label">Expires: </span><span class="float-right"><%= hotAuctions[i].expirationDate %></span></div>
+                      <div class="views"><span class="float-left card-label">Views: </span><span class="float-right"><%= hotAuctions[i].uniqueViews %></span></div>
+                      <div class="dropdown-divider"></div>
+                      <div class="type"><span class="float-left card-label">Type: </span><span class="float-right"><%= hotAuctions[i].type %></span></div>
+                      <div class="gr-score"><span class="float-left card-label">GR Score: </span><span class="float-right"><span class="score-highlight"><%= hotAuctions[i].adminRating %>/</span>10</span></div>
+                      <div class="seller-info"><span class="float-left card-label">Seller: </span><span class="float-right"><%= hotAuctions[i].user %></span></div>
+                      <div class="rating"><span class="float-left card-label">Rating: </span><span class="float-right card-label"><% if (hotAuctions[i]["userRating"].userRating == undefined) { %>
+                        Not Yet Rated
+                        <% } else {%>
+                          <% for(let j = 1 ; j <= 5 ;j++) { %>
+                            <% if ( j <= hotAuctions[i]["userRating"].userRating) { %>
+                              <img alt="" src="/img/Rating<%=j%>_10x10.png">
+                              <% } else { %>
+                                <img alt="" src="/img/Rating0_10x10.png">
+                                <% }  %>
+                                  <% }  %>
+                                    <% }%></span></div>
+                      <div class="dropdown-divider"></div>
+                      <div class="current-bid"><span class="float-left card-label">Current Bid: </span><span class="float-right bitcoin"><i class="fab fa-bitcoin" aria-hidden="true"></i>&nbsp;<%= hotAuctions[i].currentBid%></span></div>
+                      <div class="buyout-price mb-auto"><span class="float-left card-label">Buyout: </span><span class="float-right bitcoin"><%if (hotAuctions[i].buyoutPrice != "") {%><i class="fab fa-bitcoin" aria-hidden="true"></i>&nbsp;<%= hotAuctions[i].buyoutPrice %><%} else {%>Not Available<%}%></span></div>
+                  </div>
+                </div>               
+            </div>
+            <% } %>
+              <% } else { %>
+                <div>
+                  No Auction Found.
+                </div>
+                <% } %>
+      </div>
+      <input type="hidden" id="auctionlength" value="<%= hotAuctions.length%>">
+        <input type="hidden" id="AuctionTotal" value="<%= AuctionTotal%>">
+        <% if(hotAuctions.length > 9) { %>
+          <div align="center">
+            <form id="loadmoreForm" method="GET" action="/welcome">
+              <button class="btn load-more-auctions" value="Load More" id="loadmore">
+                Load More
+              </button>
+            </form>
+          </div>
+          <% } %>
+    </div>
+  <% include ./footer.ejs %>
+</body>
+<!-- end::Body -->
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/socketIO-2.0.4/socketIO.js"></script>
+<script>
+  var socket = io();
+  socket.on('bidUpdate', function (response) {
+    $("#" + response.auction + " span").html(response.newBid + '<i class="fa fa-usd" aria-hidden="true">');
+    $("#" + response.auction + "2" + " span").html(Number(response.newBid) +
+      '<i class="fa fa-btc" aria-hidden="true">');
+  });
+</script>
+
+<script type="text/javascript">
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  $(document).ready(function () {
+    let limit = document.getElementById("AuctionTotal").value;
+    let auctionlength = document.getElementById("auctionlength").value;
+    if (limit > auctionlength) {
+      $("#loadmoreForm").submit(function (event) {
+        event.preventDefault();
+        $this = $(this);
+        var currentLimit = getParameterByName('limit') || 10;
+        limit = Number(currentLimit) + 10;
+        var url = $this.attr('action') + '?limit=' + limit;
+        window.location.href = url;
+      });
+    } else {
+
+      $("#loadmore").prop("disabled", true);
+    }
+  });
+</script>
+
+</html>

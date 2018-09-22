@@ -1,0 +1,37 @@
+.create-auction-header {
+    padding-top: 30px
+}
+
+.create-auction {
+    color: #F7921A;
+}
+
+.create-auction-wrapper {
+    background-color: #fff;
+    border-radius: 6px;
+    padding-bottom: 10px;
+}
+
+.upload-info [class*='col-']:not(:last-child):after {
+    background: #e0e0e0;
+    width: 1px;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    min-height: 70px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

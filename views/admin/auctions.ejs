@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GREYRALLY | Admin</title>
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/admin/css/perfect-scrollbar.min.css" />
+<link rel="stylesheet" href="/admin/css/style.css"/>
+<link rel="shortcut icon" href="/images/favicon.png"/>
+
+<!-- Sweet alert -->
+<link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+<!-- ========= -->
+
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="/admin/css/datatables.min.css">
+<!-- ========= -->
+
+</head>
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <% include ./navbar.ejs %>
+    <!--End navbar-->
+    <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <!-- SIDEBAR STARTS -->
+    <% include ./slidebar.ejs %>
+    <!-- SIDEBAR ENDS -->
+      <div class="content-wrapper">
+        <h3 class="text-primary mb-4">Dashboard</h3>
+        <% include ./header.ejs %>
+        <div class="card">
+          <div class="card-block">
+            <h5 class="card-title mb-4">Auctions </h5>
+            <table id="auctions" class="display" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Auction</th>
+                  <th>User</th>
+                  <th>Case</th>
+                  <th>Os</th>
+                  <th>Buyout Price</th>
+                  <th>Current Bid</th>
+                  <th>Views</th>
+                  <th>Status</th>
+                  <th text-align="center">Actions</th>
+                </tr>
+              </thead>
+
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <!-- begin::Footer -->
+      <% include ./footer.ejs %>
+      <!-- end::Footer -->
+    </div>
+  </div>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/off-canvas.js"></script>
+<script type="text/javascript" src="/admin/js/hoverable-collapse.js"></script>
+<script type="text/javascript" src="/admin/js/misc.js"></script>
+<script type="text/javascript" src="/admin/js/maps.js"></script>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script> -->
+<script type="text/javascript" src="/admin/js/datatables.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#auctions').DataTable( {
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        url: "/admin/auctionList",
+        type: "post"
+      },
+      "columns": [
+        {"data": "name",
+          render: function ( data, type, row ) {
+            console.log(`Data is ${JSON.stringify(data)}`)
+            return '<a href="/admin/auctions/'+row.name+'/details">'+row.name+'</a>';
+          },
+        },
+        {"data": "user"},
+        {"data": "case"},
+        {"data": "os"},
+        {
+          "data": "buyoutPrice",
+          "searchable": false
+        },
+        {
+          "data": "currentBid",
+          "searchable": false
+        },
+        {
+          "data": "uniqueViews",
+          "searchable": false
+        },
+        {
+          "data": "adminApproved",
+          "searchable": false,
+          "sortable": false,
+          render: function ( data, type, row ) {
+            console.log(`Data is ${JSON.stringify(data)}`)
+            if ( row.adminApproved == '1' ) {
+              return '<span class="badge badge-success">Approved</span>';
+            } else {
+              return '<span class="badge badge-danger">Unapproved</span>';
+            }
+          },
+        },
+        {
+          "data": "status",
+          "searchable": false,
+          "sortable": false,
+          render: function ( data, type, row ) {
+            if ( row.adminApproved == '1') {
+              if(row.status == 0) {
+                // return '<a href="/admin/auctions/'+ row.name +'/unapprove" class="btn btn-sm btn-danger">Unapprove</a> <a href="/admin/auctions/'+ row.name +'/enable" class="btn btn-sm btn-success">Enable</a>';
+                return '<input type="button" id='+ row.name +' onclick="unapproveAuction(this.id)" class="btn btn-sm btn-danger" value="Unapprove"> <a href="/admin/auctions/'+ row.name +'/enable" class="btn btn-sm btn-success">Enable</a>';
+              } else {
+                // return '<input type="button" id='+ row.name +' onclick="unapproveAuction(this.id)" class="btn btn-sm btn-danger" value="Unapprove"> <a href="/admin/auctions/'+ row.name +'/disable" class="btn btn-sm btn-warning">Disable</a>';
+                return '<input type="button" id='+ row.name +' onclick="unapproveAuction(this.id)" class="btn btn-sm btn-danger" value="Unapprove"> <a href="/admin/auctions/'+ row.name +'/disable" class="btn btn-sm btn-success">Disable</a>';
+              }
+            } else {
+              return '<input type="button" id='+ row.name +' onclick="rateAuction(this.id)" class="btn btn-sm btn-success" value="Approve">';
+            }
+          },
+        }
+      ],
+    });
+
+    $('body').on('click', '#ptest', function() {
+        alert("The paragraph was clicked.");
+    });
+  });
+</script>
+<script type="text/javascript" src="/js/sweetalert-1.1.3/sweetalert.min.js"></script>
+<script type="text/javascript">
+  function rateAuction(auction) {
+    swal({
+      title: "Rating!",
+      text: "Give Rating in between 1 to 10",
+      type: "input",
+      inputType: "number",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      inputPlaceholder: "Rating",
+      showLoaderOnConfirm: true
+    }, function (rating) {
+      if((Number(rating <= 10)) && (Number(rating) >= 1 )) {
+        $.ajax({
+          type: "POST",
+          url: "/admin/auctions/" + auction + "/approve",
+          data: { "rating": rating },
+          success: function(response) {
+            swal({
+              title: "Auction approved!",
+              text: "Redirecting in 2 seconds.",
+              type: "success",
+              timer: 2000,
+              showConfirmButton: false
+            }, function() {
+              window.location.href = "/admin/auctions";
+            });
+          },
+        });
+      } else {
+        swal({
+          title: "Something Wrong",
+          text: "Please enter valid rating.",
+          type: "error",
+          timer: 2000,
+          showConfirmButton: false
+        })
+      }
+    });
+  }
+  function unapproveAuction(auction){
+    swal({
+      title: "Disapprove",
+      text: "<textarea id='txt' rows='5' cols='50' maxlength='200' placeholder='Disapproval reason'></textarea>",
+      html:true,
+      showCancelButton: true,
+      closeOnConfirm: false,
+      showLoaderOnConfirm: false,
+      animation: "slide-from-top",
+    }, 
+     (reason)=>{
+       let res =  document.getElementById('txt').value;
+        if (res) {
+          console.log(`Reason is ${res}`)
+          $.ajax({
+            type:'POST',
+            url:"/admin/auctions/" + auction + "/unapprove",
+            data: { "reason": res },
+            success: function(response){
+              swal({
+                title: "Reason send",
+                text: "Redirect in 2 seconds.",
+                type: "success",
+                timer: 2000,
+                showConfirmButton:false
+              }, ()=>{
+                window.location.href = "/admin/auctions";
+              })
+            }
+          })          
+        }
+        // else{
+        //   $.ajax({
+        //     type:'POST',
+        //     url:"/admin/auctions/" + auction + "/unapprove",
+        //     data: { "reason": reason },
+        //     success: function(response){
+        //       swal({
+        //         title: "Reason send",
+        //         text: "Redirect in 2 seconds.",
+        //         type: "success",
+        //         timer: 2000,
+        //         showConfirmButton:false
+        //       }, ()=>{
+        //         window.location.href = "/admin/auctions";
+        //       })
+        //     }
+        //   })
+        // }
+     }
+    )
+  }
+</script>
+
+</body>
+</html>

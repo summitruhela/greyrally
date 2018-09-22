@@ -1,0 +1,221 @@
+<!-- BEGIN: Header -->
+
+<header class="m-grid__item m-header head-bck " data-minimize-mobile-offset="200" data-minimize-offset="200">
+  <div class="m-container m-container--fluid m-container--full-height">
+    <div class="m-stack m-stack--ver m-stack--desktop">
+      <!-- BEGIN: Brand -->
+
+      <div class="m-stack__item m-brand m-brand--skin-dark" >
+        <div class="m-stack m-stack--ver m-stack--general">
+          <div class="m-stack__item m-stack__item--middle m-stack__item--center m-brand__logo"> <a class="m-brand__logo-wrapper" href="/"><img alt="" src="/img/logo.png"></a> </div>
+          <div class="m-stack__item m-stack__item--middle m-brand__tools">
+            <!-- BEGIN: Responsive Header Menu Toggler -->
+            <a class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block" href="javascript:;" id="m_aside_header_menu_mobile_toggle"><span></span></a> <!-- END -->
+            <!-- BEGIN: Topbar Toggler -->
+            <a class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block" href="javascript:;" id="m_aside_header_topbar_mobile_toggle"><span></span></a> <!-- BEGIN: Topbar Toggler -->
+          </div>
+        </div>
+      </div>
+      <!-- END: Brand -->
+      <p id="userId" style="visibility: hidden;"><%= user %></p>
+      <div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+        <!-- BEGIN: Horizontal Menu -->
+        <button class="m-aside-header-menu-mobile-close m-aside-header-menu-mobile-close--skin-dark" id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+        <div class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark" id="m_header_menu">
+          <ul class="m-menu__nav m-menu__nav--submenu-arrow">
+            <li class="search-main test m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow    m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light m-list-search m-list-search--skin-light"
+              data-dropdown-persistent="true" data-dropdown-toggle="click" data-search-type="dropdown" id="m_quicksearch"> <a class="m-nav__link m-dropdown__toggle" href="#"> <span class="m-nav__link-icon"> <img alt="" src="/img/Search_icon_32x32.png"></span>
+              <input autocomplete="off" autofill="off" id="m_quicksearch_input" class="search-input" placeholder="Search Auctions"/>
+              </a>
+
+            </li>
+          </ul>
+        </div>
+        <!-- END: Horizontal Menu --><!-- BEGIN: Topbar -->
+
+        <div class="m-topbar m-stack m-stack--ver m-stack--general" id="m_header_topbar">
+          <div class="m-stack__item m-topbar__nav-wrapper h-right">
+            <ul class="m-topbar__nav m-nav m-nav--inline" >
+              <li aria-haspopup="true" class="m-menu__item m-menu__item--submenu m-menu__item--rel prfl-tag" data-menu-submenu-toggle="click">
+              <!--   <% if (user.length) { %>
+                <a class="m-menu__link" href="/users/<%= user %>/profile"> <span class="m-menu__link-text">Prosfile</span> </a>
+                <% } %> -->
+              </li>
+              <li class=" about_link m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light second-link"> <a class="m-nav__link " href="/about-us"><span class="m-topbar__userpic" style="color: #E1E1E1;"> About</a> </li>
+              <li class="m-nav__item m-topbar__user-profile notifacation_link  m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
+              <a class="m-nav__link m-dropdown__toggle" href="#"><span class="m-topbar__userpic message-box">
+                <span id="notificatonCounter" style="visibility: hidden;"></span>
+               <img alt="" src="/img/alert_32x32_e1e1e1.png" id="notifications"></span></a>
+              <div class="m-dropdown__wrapper notification-main"> <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                <div class="m-dropdown__inner">
+                  <div class="m-dropdown__body">
+                    <div class="m-dropdown__content" style='overflow:auto; max-height:400px;min-height: 175px;table-layout: auto;'>
+                      <ul class="m-nav m-nav--skin-light">
+                        <li class="m-nav__section m--hide"> <span class="m-nav__section-text">Section</span> </li>
+                        <li id="load"></li>
+                        <li class="m-nav__item" id="listNotifications">
+                          <!-- Notifications block -->loading...
+                        </li>
+
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </li>
+              <li class=" acution_link m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light second-link" data-dropdown-toggle="click"> <a class="m-nav__link " href="/users/<%= user %>/create-auction"><span class="m-topbar__userpic"> <img alt="" src="/img/Upload_32x32.png"></span></a> </li>
+              <li class=" user_link m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
+              <a class="m-nav__link m-dropdown__toggle" href="#"><span class="m-topbar__userpic"> <img alt="" src="/img/User_32x32.png"></span></a>
+              <div class="m-dropdown__wrapper singup-drop-down"> <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                <div class="m-dropdown__inner">
+                  <div class="m-dropdown__body">
+                    <div class="m-dropdown__content">
+                      <ul class="m-nav m-nav--skin-light inner_sub_menu ">
+                        <li class="m-nav__section m--hide"> <span class="m-nav__section-text">Section</span> </li>
+                        <li class="m-nav__item">
+                          <a class="m-nav__link" href="/users/<%= user %>/profile">
+                          <span class="m-nav__link-title"><span class="m-nav__link-wrap"> <span class="m-nav__link-text">Profile</span> <span class="m-nav__link-badge"></span> </span></span>
+                          </a>
+                        </li>
+                        <li class="m-nav__item">
+                          <a class="m-nav__link" href="/users/<%= user %>/auctions">
+                            <span class="m-nav__link-text">
+                              My Auctions
+                            </span>
+                          </a>
+                        </li>
+                        <li class="m-nav__item">
+                          <a class="m-nav__link" href="/users/<%= user %>/auctions/followed">
+                            <span class="m-nav__link-text">
+                              Followed Auctions
+                            </span>
+                          </a>
+                        </li>
+                        <li class="m-nav__item"> <a class="m-nav__link" href="/users/<%=user%>/wallet"> 
+                          <span class="m-nav__link-text">My Wallet</span></a>
+                        </li>
+                        <li class="m-nav__item"> <a class="m-nav__link" href="/users/<%=user%>/transactions/history">
+
+                          <span class="m-nav__link-text">My Transactions</span></a> </li>
+
+                        <li class="m-nav__separator m-nav__separator--fit"> </li>
+                        <li class="m-nav__item"> <a class="m-nav__link">
+                          <span class="m-nav__link-text">Help (coming soon)</span></a>
+                        </li>
+                        <li class="m-nav__item"> <a class="m-nav__link" href="#" onclick="logout()">
+                          <span class="m-nav__link-text">Logout</span></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- END: Topbar -->
+      </div>
+    </div>
+  </div>
+</header>
+<!-- END: Header -->
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/suggestion-box.js"></script>
+<script type="text/javascript" src="/js/common/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.ajax({
+      type: "POST",
+      data: { "user": $("#userId").text() },
+      url: "/countNotifications",
+      success: function(response) {
+        console.log("RESPONSE FROM HEADER: ", response)
+        if(response.count > 0) {
+          $('#notificatonCounter').css('visibility', 'inherit');
+          $('#notificatonCounter').text(response.count);
+        } else {
+          $('#notificatonCounter').css('visibility', 'hidden');
+        }
+        if(response.notifications.length) {
+          $( "#listNotifications" ).empty()
+          for(let i=0; i<response.notifications.length; i++) {
+
+            $( "#listNotifications" ).append(
+              `<div class="noti-main-row" id="main${response.notifications[i].id2}">
+                <div class="inner-1" style="width: 85%">
+                  <p style="text-align: right; word-break: break-word">${response.notifications[i].notification}</p>
+                  <p class="text-right"><span class="blue">${response.notifications[i].createdAt}</span></p>
+                </div>
+                <input type="image" class="close-icon-middle" 
+                  onclick="removeNotification(event, this)" onmouseover="iconOver(this)" onmouseout="iconOut(this)" 
+                  id="${response.notifications[i]._id}" title="remove" style="cursor:pointer;" src="/img/X_icon_24x24.png">
+              </div>`
+            );
+            if (response.notifications[i].status) {
+              $(".noti-main-row").css({"background-color":"#E1E1E1","border-bottom": "1px solid #ffffff"})
+            }
+          }
+        } else {
+          if (!$("#listNotifications").find(".noti-main-row").length) {
+            $( "#listNotifications" ).html(
+              `<center><p style="margin-top:20px"><I>“Hear no, speak no, see no evil.”</I></p></center><center><p style="margin-top:20px">No alerts at this time.</p></center>`
+            );
+          }
+        }
+      },
+    });
+  })
+</script>
+
+<script type="text/javascript">
+  $("#notifications").click(function() {
+    $('#notificatonCounter').css('visibility', 'hidden');
+    $.ajax({
+      type: "POST",
+      url: "/markCurrentUserNotificationsRead"
+    });
+  })
+</script>
+<script type="text/javascript">
+    function removeNotification(event, obj) {
+      event.stopPropagation();
+      $.ajax({
+        type: "DELETE",
+        data: { notificationId: obj.id },
+        url: "/removeCurrentUserNotification",
+        success: function(response) {
+            document.getElementById(obj.parentElement.id).remove();
+            if (!$("#listNotifications").find(".noti-main-row").length) {
+              $( "#listNotifications" ).html(
+                  `<center><p style="margin-top:20px"></p></center><center><p style="margin-top:20px">No alerts at this time.</p></center>`
+              );
+            }
+        },
+      });
+    }
+
+  function iconOver(obj){
+    obj.src = '/img/X_Hover_656565_24x24.png'
+  }
+  function iconOut(obj){
+    obj.src = '/img/X_icon_24x24.png'
+  }
+</script>
+
+<script type="text/javascript">
+  $('body').click(function(evt){
+
+   if(evt.target.class == "message-box"
+    || $(evt.target).closest('.message-box').length) {
+    return;
+   }
+
+  $('#listNotifications').children('.noti-main-row').each(function () {
+    $(this).css({
+        "background-color":"#ffffff",
+        "border-bottom": "1px solid #e1e1e1",
+      })
+    });
+  });
+</script>

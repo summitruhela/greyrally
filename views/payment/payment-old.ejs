@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register</title>
+    <!-- CSS-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/vendors.bundle.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.bundle.css" type="text/css" />
+    <link rel="stylesheet" href="css/reset.css"  type="text/css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+    <!-- Favicon and touch icons-->
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  </head>
+  <body>
+
+  <!-- ================== Model for add Bank account ====================== -->
+  <div class="modal fade" id="bank-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Bank Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="/" method="post" id="payment-form">
+        <div class="errors"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Country</label>
+                <select class="form-control input-lg" id="country" data-stripe="country">
+                  <option value="US">United States</option>
+                  <option value="AU">Australia</option>
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="BR">Brazil</option>
+                  <option value="CA">Canada</option>
+                  <option value="DK">Denmark</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="HK">Hong Kong</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IT">Italy</option>
+                  <option value="JP">Japan</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="MX">Mexico</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="NO">Norway</option>
+                  <option value="PT">Portugal</option>
+                  <option value="SG">Singapore</option>
+                  <option value="ES">Spain</option>
+                  <option value="SE">Sweden</option>
+                  <option value="CH">Switzerland</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Currency</label>
+                <select class="form-control input-lg" id="currency" data-stripe="currency">
+                  <option value="usd">USD</option>
+                  <option value="aud">AUD</option>
+                  <option value="brl">BRL</option>
+                  <option value="cad">CAD</option>
+                  <option value="eur">EUR</option>
+                  <option value="gbp">GBP</option>
+                  <option value="hkd">HKD</option>
+                  <option value="jpy">JPY</option>
+                  <option value="mxn">MXN</option>
+                  <option value="nzd">NZD</option>
+                  <option value="sgd">SGD</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Full Legal Name</label>
+                <input class="form-control input-lg account_holder_name" id="account_holder_name" type="text" data-stripe="account_holder_name" placeholder="Jane Doe" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Account Type</label>
+                <select class="form-control input-lg account_holder_type" id="account_holder_type" data-stripe="account_holder_type">
+                  <option value="individual">Individual</option>
+                  <option value="company">Company</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6" id="routing_number_div">
+              <div class="form-group">
+                <label id="routing_number_label">Routing Number</label>
+                <input class="form-control input-lg bank_account" id="routing_number" type="tel" size="12" data-stripe="routing_number" placeholder="111000025" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label id="account_number_label">Account Number</label>
+                <input class="form-control input-lg bank_account" id="account_number" type="tel" size="20" data-stripe="account_number" placeholder="000123456789" autocomplete="off">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-lg btn-block btn-success submit" type="submit">Add Bank Account</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- ================== Model for add Bank aacount Over ================== -->
+
+  <!-- ==================Model for bitcoin================================== -->
+  <div class="modal fade custom-modal" id="bitcoin" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+          <!-- <h4 class="modal-title"><i class="fa fa-hand-o-down" aria-hidden="true"></i> Request</h4> -->
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12 scantitle">
+              <h6>Scan QR Code:<a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i></a> <a href="#" class="pull-right">Go Back</a> </h6>
+            </div>
+            <div class="col-md-12 text-center">
+              <img src="images/sacn-img.jpg" alt="">
+            </div>
+            <div class="col-md-12 ">
+
+              <!-- ======== Bitcoin QR code will be append here ============.-->
+              <div id="bitcoinQRcode"></div>
+              <!-- ========================================================= -->
+
+              <!-- ======== Bitcoin Public key will be append here.==========-->
+              <div class="form-group scantextbox">
+                <input type="text" class="form-control" id="bitcoinAdd" value="" readonly style="font-weight: bold; font-size: 18px;">
+                <img src="/img/ajax-loader.gif" id="loading-indicator" style="display:none" />
+                <span id="bitcoinErr" style="color: red; font-weight: bold;"></span>
+                <input type="button" value="Copy" class="copybtn" data-clipboard-action="copy" data-clipboard-target="#bitcoinAdd" >
+              </div>
+              <!-- ========================================================= -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==================Model for bitcoin Over============================= -->
+
+
+    <!-- Top content-->
+    <div class="top-content">
+      <div class="inner-bg">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text">
+              <h1><strong>Payment Options</strong></h1>
+              <!--
+              <div class="description">
+              <p>This is a free responsive login form made with Bootstrap.</p>
+              </div>
+              -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 form-box">
+              <!-- <div class="form-top">
+                <div class="form-top-right"> <i class="fa fa-key"></i> </div>
+              </div>-->
+              <div class="form-bottom">
+                <form class="login-form" role="form" action="/payment" method="post">
+                  <div class="form-group">
+                    <label for="form-username">Company Name</label>
+                    <input class="form-username form-control" type="text" name="company_name" placeholder="Please Enter Company Name" id="">
+                  </div>
+                  <div class="form-group">
+                    <label for="preferences">Preference Keywords</label>
+                    <input class="form-password form-control" type="text" name="preferences" placeholder="Add Preference" id="">
+                  </div>
+
+
+                 <!--  <div class="form-group payoption">
+                    <label for="payment-option">Payment Option</label>
+                      <a class="paybtn red" data-toggle="modal" data-target="#bank-details">Bank Account</a>
+                      <a class="paybtn green" href="#">Credit Card</a>
+                      <a class="paybtn orange" data-toggle="modal" data-target="#bitcoin" onclick="generateBitcoinAdd()">Bitcoin</a>
+                  </div> -->
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6">
+<!--
+                        <script
+                          type="text/javascript"
+                          class="stripe-button"
+                          data-key="pk_test_5OvJjBEG03BoCyYT4mSShaY5"
+                          data-amount="50"
+                          data-bitcoin="true"
+                          data-name="Grey rally"
+                          data-description="Payment for subscription"
+                          data-locale="auto"
+                          data-currency="usd"
+                          data-panel-label="Pay"
+                          data-zip-code="true"
+                        >
+                        </script> -->
+
+                        <button
+                          class="btn btn-sm submit"
+                          id="subscribe"
+                          type="submit"
+                          value="Pay with Card"
+                          data-key="pk_test_5OvJjBEG03BoCyYT4mSShaY5"
+                          data-amount="50"
+                          data-bitcoin="true"
+                          data-name="Grey rally"
+                          data-description="Payment for subscription"
+                          data-locale="auto"
+                          data-currency="usd"
+                          data-panel-label="Pay"
+                          data-zip-code="true"
+                        />
+
+                        <!-- <button class="btn btn-sm submit" type="submit">Submit</button> -->
+                      </div>
+                      <div class="col-md-6 col-sm-6">
+                        <button class="btn btn-sm submit darkred" type="submit">Dispute</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="login-botton text-center">
+              <p>Already Have an Account?<a href="signin">Login</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascript-->
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+     <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode-1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script type="text/javascript" src="js/jquery.backstretch.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/parsley.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/general.js"></script>
+    <script type="text/javascript" src="js/payment/payment.js"></script>
+    <!-- ======= -->
+  </body>
+</html>

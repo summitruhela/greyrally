@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- begin::Head -->
+<head>
+<meta charset="utf-8" />
+<title>GREYRALLY</title>
+<meta name="description" content="Latest updates and statistic charts">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+<link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+
+<link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+
+</head>
+<!-- end::Head -->
+
+<!-- end::Body -->
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+
+  <!-- begin::Header -->
+  <% include ../header.ejs %>
+  <!-- end::Header -->
+
+  <!-- begin::Body -->
+  <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+    <!-- BEGIN: Left Aside -->
+    <button class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn"><i class="la la-close"></i></button>
+
+    <!-- END: Left Aside -->
+    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+      <!-- BEGIN: Subheader -->
+      <div class="m-subheader ">
+
+        <div class="d-flex align-items-center">
+          <div class="mr-auto">
+            <h3 class="m-subheader__title ">Unconfirmed Transactions</h3>
+          </div>
+        </div>
+      </div>
+      <!-- END: Subheader -->
+
+      <div class="col-xl-12">
+        <div class="m-portlet m-portlet--mobile ap-custom mt-4">
+
+          <div class="m-portlet__body">
+            </div>
+            <br/>
+            <br/>
+            <div class="col-xl-12 col-md-12 col-sm-12 table_title">
+              <p class="title_style" style="font-size:1.6em;">Unconfirmed Transaction</p>
+            </div>
+            <div class=" col-md-12 m-separator m-separator--space m-separator--dashed mi_div_top"></div>
+            <div class="col-xl-12 col-md-12 col-sm-12 table_title">
+              <p class="title_style">Transactions</p>
+            </div>
+            <div class="m_datatable m-datatable m-datatable--default m-datatable--scroll  m-datatable--loaded " id="m_datatable_latest_orders" style="">
+              <div class="m-section__content customtable">
+                <div class="table-responsive">
+                  <table class="table m-datatable__table table_bg">
+                    <thead class="m-datatable__head">
+                      <tr class="m-datatable__row " style="height: 55px;">
+                       <th class="auction_td1_width"> Buyer</th>
+                       <th class="auction_td1_width"> Auction</th>
+                       <th class="auction_td1_width"> Amount</th>
+                       <th class="auction_td1_width"> Date</th>
+                       <th class="auction_td1_width"> Confirmations </th>
+                      </tr>
+                    </thead>
+                    <tbody class="m-datatable__body " style="height: 325px; position: relative; overflow: visible;" data-scrollbar-shown="true">
+                      <% for(let i=0; i< trxInfo.length; i++) { %>
+                        <tr class="m-datatable__row m-datatable__row--even">
+                          <td><%= trxInfo[i].buyer %></td>
+                          <td><%= trxInfo[i].auction %></td>
+                          <td><%= trxInfo[i].amount %> USD</td>
+                          <td><%= trxInfo[i].createdAt %></td>
+                          <td>
+                            <button type="button" onclick="fetchStatus(this)" id="<%= trxInfo[i]._id%>" class="btn btn-accent m-btn m-btn--air m-btn--custom mi_button">
+                              Track
+                            </button>
+                            <span  id="<%= trxInfo[i]._id%>2" style="font-size: 16px; font-weight: bold; color: red;">  <img id="<%= trxInfo[i]._id%>-loader" style="display: none" src="/img/ajax-loader.gif"></span>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- begin::Footer -->
+  <% include ../footer.ejs %>
+  <!-- end::Footer -->
+<!-- end:: Page -->
+
+<!-- begin::Scroll Top -->
+<!-- <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300"> <i class="fa fa-angle-up"></i> </div> -->
+<!-- end::Scroll Top --> <!-- begin::Quick Nav -->
+
+<!--begin::Base Scripts -->
+<script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/js/vendors.bundle.js" type="text/javascript"></script>
+<script src="/js/scripts.bundle.js" type="text/javascript"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/suggestion-box.js"></script>
+<script type="text/javascript" src="/js/common/search.js"></script>
+<!--end::Base Scripts -->
+
+<script type="text/javascript">
+  function fetchStatus(data) {
+    $("#" + data.id + "-loader").css("display", "block");
+    $("#" + data.id).attr("desabled", "true");
+    $.ajax({
+      type: "POST",
+      url: "/users/transactions/" + data.id +"/unconfirmed",
+      success: function(response) {
+        $("#" + data.id + "-loader").css("display", "none");
+        $("#" + data.id + "2").text(response + "/6");
+      },
+      error:  function(err) {
+        $("#" + data.id + "-loader").css("display", "none");
+        $("#" + data.id + "2").text(response + "/6");
+      },
+    });
+  }
+</script>
+
+</body>
+<!-- end::Body -->
+</html>

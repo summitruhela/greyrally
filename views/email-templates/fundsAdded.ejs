@@ -1,0 +1,73 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<style type="text/css">
+
+body {  font-family: 'Roboto', sans-serif;  font-size: 16px;  font-weight: 300; color: #888;  line-height: 30px;  margin: 0 auto; position: relative;}
+.main { width: 320px; margin: 40px auto;  background: #282B3B;  padding: 10px;}
+.logo { text-align: left; margin-bottom: 30px;  margin-top: 20px; width: 100%;  float: left}
+.logo a { color: #e1e1e1; font-size: 22px;  display: block; line-height: 18px;  text-decoration: none;}
+.content {  background: #fff; padding: 30px;  width: 100%;  float: left;  text-align: center;}
+.content h2 { font-size: 20px;  color: #282B3B; margin: 0 0 10px 0; padding: 0;}
+.content a.email_logo { margin-bottom: 10px;  display: inline-block;  margin-top: 10px;}
+.content p.body_text {  margin-bottom: 10px;  display: inline-block;  margin-top: 20px; font-size: 14px;  color: #000;  line-height: 20px;  font-weight: 500;}
+.content p.body_text a.just_click { font-size: 14px;  color: #282B3B; line-height: 20px;  font-weight: 500; text-decoration: none;}
+.content .confirm_btn a { text-decoration: none;  font-size: 14px;  color: #fff;  background: #F7921A;  border: 1px solid #8b847e;
+  padding: 5px 30px;  margin-top: 5px;  display: inline-block;  border-radius: 5px;}
+.content p.about_text { margin-bottom: 0px; display: inline-block;  margin-top: 60px; font-size: 16px;  color: #656565; line-height: 20px;  font-weight: 400;}
+.content p.about_text a { text-decoration: underline; color: #656565;}
+footer {  margin: 0 auto; text-align: center; width: 100%;  display: inline-block;}
+footer p {  color: #e1e1e1; font-size: 10px;  line-height: 20px;  padding: 20px 80px; margin-bottom: 0}
+footer p span { font-size: 16px;  position: relative; top: 2px;}
+
+
+</style>
+</head>
+
+<body>
+<div class="main">
+  <div class="logo"> <a href="https://greyrally.com/" >GREYRALLY</a> </div>
+  <div class="content">
+    <table width="100%" border="0" align="center">
+      <tbody>
+        <tr>
+          <td colspan="2"><h2>Funds added!</h2></td>
+        </tr>
+        <tr>
+          <td colspan="2"><a class="email_logo" href="#"><img alt="" src="cid:btc"></a></td>
+        </tr>
+
+         <tr >
+          <td width="50%" style="text-align: right; font-size: 14px; padding-right:  10px; font-weight: 400; color: #656565" > Currency: </td>
+           <td width="50%" style="text-align: left; font-size: 14px; font-weight: 400; color: #000" > <%= crypto_type %> </td>
+        </tr>
+
+           <tr>
+        <td style="text-align: right; padding-right: 10px; font-size: 14px; font-weight: 400; color: #656565" > Amount: </td>
+           <td  style="text-align: left; font-size: 14px; font-weight: 400; color: #f7921a;" > <%= amount %> </td>
+        </tr>
+
+
+  <tr>
+          <td colspan="2"><p class="body_text">Happy hunting from the <br> GREYRALLY team.
+</p></td>
+        </tr>
+
+        <tr>
+          <td colspan="2"><p class="about_text">Cash out anytime by going to <br /> <a href="http://<%= host %>:<%= port %>/login">My Wallet </a>anytime.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    <p>2018 <span>©</span> GREYRALLY <br />
+      All rights reserved</p>
+  </footer>
+</div>
+</body>
+</html>

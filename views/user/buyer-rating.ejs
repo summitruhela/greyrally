@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- begin::Head -->
+<head>
+<meta charset="utf-8" />
+<title>GREYRALLY</title>
+<meta name="description" content="Latest updates and statistic charts">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<!--end::Web font -->
+
+<!--begin::Base Styles -->
+
+<!--begin::Page Vendors -->
+<link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+<!--end::Page Vendors -->
+<link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+
+<link href="/css/vendors.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/css/reset.css" rel="stylesheet" type="text/css" />
+<!--end::Base Styles -->
+
+<!--begin::Font CSS -->
+<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!--end::Font CSS -->
+
+<link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+</head>
+<!-- end::Head -->
+
+<!-- end::Body -->
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+
+  <!-- begin::Header -->
+  <% include ../header.ejs %>
+  <!-- end::Header -->
+
+  <!-- begin::Body -->
+  <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+    <!-- BEGIN: Left Aside -->
+    <button class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn"><i class="la la-close"></i></button>
+
+    <!-- END: Left Aside -->
+    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+      <!-- BEGIN: Subheader -->
+      <div class="m-subheader ">
+
+        <div class="d-flex align-items-center">
+          <div class="mr-auto">
+            <h3 class="m-subheader__title ">Buyer</h3>
+          </div>
+        </div>
+      </div>
+      <!-- END: Subheader -->
+      <div class="m-content">
+        <!--Begin::Main Portlet-->
+        <div class="row">
+          <div class="col-xl-12 col-sm-12">
+            <!--begin:: Widgets/Audit Log-->
+            <div class="m-portlet m-portlet--full-height list-main">
+              <div class="m-portlet__body ">
+                <div class="tab-content ">
+                  <div class="row" style="margin-top: 15px">
+                <div class="m-portlet__head-title col-xl-10">
+                  <h3 class="m-portlet__head-text" style="word-break: break-all;"> <%= buyer.userName %> </h3>
+                </div> </div>
+<table class="" id="m-datatable--436775610956" style="display: block; height: 210;word-break: break-all;">
+                  <tbody class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide _mCS_1" style="height: 325px; position: relative; overflow: visible;" data-scrollbar-shown="true">
+                    <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+                      <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+
+
+                        <tr class="m-datatable__row m-datatable__row--even" style=" ">
+                          <td class="m-datatable__cell--sorted m-datatable__cell ">Join Date:</td>
+                          <td  class="m-datatable__cell--sorted m-datatable__cell"><%=buyer.date%></td>
+                        </tr>
+
+                        <tr  class="m-datatable__row m-datatable__row--even" style=" ">
+                          <td  class="m-datatable__cell--sorted m-datatable__cell ">Auctions Sold:</td>
+                          <td class="m-datatable__cell--sorted m-datatable__cell">
+                              <% if (rating.soldAuctionCount == undefined) {%>
+                            0
+                            <% } else {%>
+                            <%= rating.soldAuctionCount %>
+                            <% } %>
+
+                          </td>
+                        </tr>
+
+                        <tr class="m-datatable__row m-datatable__row--even" style=" ">
+                          <td class="m-datatable__cell--sorted m-datatable__cell ">Total Ratings:</td>
+
+                            <td  class="m-datatable__cell--sorted m-datatable__cell">
+                              <% if (rating.totalAuctionRating == undefined) {%>
+                            <span style="color:#F7921A; font-weight:400;">Not Yet Rated</span>
+                            <% } else {%>
+                              <%= rating.totalAuctionRating %>
+                            <% } %>
+                          </td>
+                        </tr>
+
+                        <tr class="m-datatable__row m-datatable__row--even" style=" ">
+                          <td class="m-datatable__cell--sorted m-datatable__cell ">Average Rating:</td>
+                          <td  class="m-datatable__cell--sorted m-datatable__cell">  <p style="margin-top: 12px">
+                            <% if (rating.userRating == undefined) { %>
+                              <span style="color:#F7921A; font-weight:400;">Not Yet Rated</span>
+                            <% } else {%>
+                            <% for(let j = 1 ; j <= 5 ;j++) { %>
+                              <% if ( j <= rating.userRating) { %>
+                              <img alt="" src="/img/Rating<%=j%>_10x10.png">
+                              <% } else { %>
+                              <img alt="" src="/img/Rating0_10x10.png">
+                            <% }  %>
+                            <% }  %>
+                            <% }%></p></td>
+                        </tr>
+                      </div>
+                      <div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">
+                        <div class="mCSB_draggerContainer">
+                          <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; height: 0px; top: 0px;">
+                            <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                          </div>
+                          <div class="mCSB_draggerRail"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </tbody>
+                </table>
+                  <div class="table-responsive followed-main">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tbody>
+                      <tr>
+                        <th>Breakdown</th>
+                        <th>
+                          <img alt="" src="/img/Rating1_10x10.png" class="mCS_img_loaded">
+                        </th>
+                        <th><img alt="" src="/img/Rating1_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating2_10x10.png" class="mCS_img_loaded"></th>
+                        <th><img alt="" src="/img/Rating1_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating2_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating3_10x10.png" class="mCS_img_loaded"></th>
+                        <th>  <img alt="" src="/img/Rating1_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating2_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating3_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating4_10x10.png" class="mCS_img_loaded"></th>
+                        <th>  <img alt="" src="/img/Rating1_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating2_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating3_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating4_10x10.png" class="mCS_img_loaded"><img alt="" src="/img/Rating5_10x10.png" class="mCS_img_loaded"></th>
+                        <th>Average</th>
+                         </tr>
+                      <tr>
+                        <td>Last 30 days</td>
+                        <td><%= allRatingDetails[0].oneRatingCount %></td>
+                        <td><%= allRatingDetails[0].twoRatingCount %></td>
+                        <td><%= allRatingDetails[0].threeRatingCount %></td>
+                        <td><%= allRatingDetails[0].fourRatingCount %></td>
+                        <td><%= allRatingDetails[0].fiveRatingCount %></td>
+                        <td><%= allRatingDetails[0].averageRating %></td>
+                      </tr>
+                      <tr>
+                        <td>Last 3 months</td>
+                        <td><%= allRatingDetails[1].oneRatingCount %></td>
+                        <td><%= allRatingDetails[1].twoRatingCount %></td>
+                        <td><%= allRatingDetails[1].threeRatingCount %></td>
+                        <td><%= allRatingDetails[1].fourRatingCount %></td>
+                        <td><%= allRatingDetails[1].fiveRatingCount %></td>
+                        <td><%= allRatingDetails[1].averageRating %></td>
+                      </tr>
+                      <tr>
+                        <td>All ratings</td>
+                        <td><%= allRatingDetails[2].oneRatingCount %></td>
+                        <td><%= allRatingDetails[2].twoRatingCount %></td>
+                        <td><%= allRatingDetails[2].threeRatingCount %></td>
+                        <td><%= allRatingDetails[2].fourRatingCount %></td>
+                        <td><%= allRatingDetails[2].fiveRatingCount %></td>
+                        <td><%= allRatingDetails[2].averageRating %></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!--<div>
+              No Auction Found.
+            </div>
+         -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end:: Body -->
+
+  <!-- begin::Footer -->
+  <% include ../footer.ejs %>
+  <!-- end::Footer -->
+</div>
+<!-- end:: Page -->
+<!-- begin::Scroll Top -->
+<!-- <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300"> <i class="fa fa-angle-up"></i> </div> -->
+<!-- end::Scroll Top --> <!-- begin::Quick Nav -->
+
+<!--begin::Base Scripts -->
+<script src="/js/vendors.bundle.js" type="text/javascript"></script>
+<script src="/js/scripts.bundle.js" type="text/javascript"></script>
+<!--end::Base Scripts -->
+
+<!--begin::Page Vendors -->
+<script src="/js/fullcalendar.bundle.js" type="text/javascript"></script>
+<!--end::Page Vendors -->
+
+<!--begin::Page Snippets -->
+<script src="/js/dashboard.js" type="text/javascript"></script>
+<!--end::Page Snippets -->
+
+<script src="/js/user/feed.js" type="text/javascript"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
+
+</body>
+<!-- end::Body -->
+</html

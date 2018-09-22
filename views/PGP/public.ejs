@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>GREYRALLY</title>
+  <meta name="description" content="Latest updates and statistic charts">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+  <link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="/css/public.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+
+  <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+</head>
+
+<body>
+
+  <% include ../new-header.ejs %>
+    <div class="container mb-5">
+      <div class="row PGP-header-wrapper">
+        <div class="mr-auto">
+          <h3 class="PGP-header">GREY RALLY PUBLIC PGP KEY</h3>
+        </div>
+      </div>
+      <div class="row PGP-wrapper mt-3">
+          <p class="m-auto">
+              -----BEGIN PGP PUBLIC KEY BLOCK----- 
+              <%= publickey %>
+              -----END PGP PUBLIC KEY BLOCK-----
+          </p>
+      </div>
+    </div>
+  <% include ../footer.ejs %>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+      <script src="/js/common/common.js" type="text/javascript"></script>
+
+</body>
+
+</html>

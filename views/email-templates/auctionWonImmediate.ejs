@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <style type="text/css">
+  .logo {
+      margin: auto;
+      text-align: center;
+      position: relative;
+    width:100%;
+      background-color:#e5e5e5;
+  }
+  .title {
+    margin: auto;
+      text-align: center;
+      position: relative;
+  }
+  .body {
+    margin: auto;
+    text-align: center;
+    position: relative;
+    font-size: large;
+  }
+  .footer {
+    margin: auto;
+    text-align: center;
+    position: relative;
+    width:100%;
+      background-color:#444444;
+  }
+  </style>
+</head>
+<div class="logo">
+    <span class="img_1"><img src="logo.jpg" alt="Logo" height="45%" width="45%"></span>
+</div>
+<div class="title">
+  <h1>Congratulations!</h1>
+</div>
+<div class="body">
+  <div class="wrap">
+    You won <strong><%= auction_name %></strong> at a price of <font color="red"><%= final_bid_amount %></font> <%= crypto_type %>! <br />
+    <br>
+    <font color="red"><%= final_bid_amount %></font> <%= crypto_type %> is being deducted from your GREYRALLY wallet and sent to the Seller's wallet. This process takes a few hours on average. <br />
+    <br>
+    Your winnings will be sent via email when this process finishes. You can check the status of this process via the "My Transactions" page.<br />
+    <br>
+  </div>
+  <div class="button">
+    <button type="button" class="btn btn-success btn-lg">"My Transactions"</button>
+    <br><br>
+  </div>
+</div>
+<div class="footer">
+  <font color="#fefefe">
+  <em>Copyright &copy; 2018 <a href="#"><font color="#fefefe">GREYRALLY</a>, All rights reserved.</em><br />
+  <br>
+  Want to change how you receive these emails?<br />
+  You can change <a href="#"><font color="#fefefe">your preferences</a> under account settings.
+</div>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--Tim added for SEO-->
+<meta name="description" content="GreyRally. Transparency in vulnerability equities. Early Access" />
+<title>GreyRally: Pre-Launch Signup</title>
+<meta name="robots" content="noarchive" />
+<meta name="googlebot" content="noarchive" />
+<meta name="google" content="nositelinkssearchbox" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- CSS-->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/form-elements.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/timadds.css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+<!-- WARNING: Respond.js doesn't work if you view the page via file://-->
+<!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+<!-- Favicon and touch icons-->
+<link rel="shortcut icon" href="img/favicon.png">
+</head>
+<body class="splash-bg">
+<!-- Top content-->
+<div class="top-content">
+  <div class="inner-bg">
+    <div class="container splash-main">
+      <div class="row ">
+        <div class="col-sm-2 col-sm-offset-2 text-left sp-logo"><img class="tlogo" src="img/png.png" /></div>
+        <div class="col-sm-6 text-left">
+          <h2> Shh….The world's first open, transparent <br />
+            vulnerability market is coming soon </h2>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2">
+          <hr>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-sm-4 col-sm-offset-2 text-left">
+          <p><h5>Join our email list for updates and early access.</h5></p><br /> 
+	  <p><h4><a href="./team">+ Meet the team</a></h4></p> 
+        </div>
+
+          <form method="POST" action="/thanks" autocomplete="off">
+            <div class="col-sm-4  ">
+              <div class="form-group splash_input">
+                <!-- <label for="email">Email *</label>-->
+                <input class="form-username form-control" id="email" type="email" name="email" placeholder="Email" required>
+                <button class="btn submit" id="save" type="submit" >Notify Me!</button>
+              </div>
+              <div class="form-group ragister-input ">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="role" value="hacker" checked="">
+                    Hacker </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="role" value="company">
+                    Company </label>
+                </div>
+              </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+  </div>
+  <footer class="footer-splash">
+    <p>2018 © GREYRALLY</p>
+  </footer>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+  let $input = $('input'),
+      $register = $('#save');
+
+  $register.attr('disabled', true)
+  $input.keyup(function() {
+    if(($('#email').val())) {
+      $('#save').prop("disabled", false);
+    } else {
+      $('#save').prop("disabled", true);
+    }
+  });
+</script>
+</body>
+</html>

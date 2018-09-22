@@ -1,0 +1,99 @@
+html,body {
+    height: 100%;
+    background-color:#656565;
+}
+
+header nav{
+    background-color:#282B3B;
+}
+
+#listNotifications{
+    max-height: 350px;
+    overflow-y: auto;
+    width: auto;
+}
+
+#listNotifications .dropdown-item:active {
+    background: none;
+}
+
+#notificationDropdown:hover {
+    cursor: pointer;
+}
+
+#notifications{
+    position: relative;
+}
+
+#notificatonCounter {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.notification-text {
+    float:none;
+    display: inline-block;
+    width:84%;
+    padding-top:5px;
+    padding-bottom:5px;
+    vertical-align: middle;
+}
+
+.noti-main-row {
+    border-bottom:1px solid #E1E1E1;
+}
+
+.noti-main-row p {
+    font-size: 13px;
+    text-align: right;
+    margin-bottom: 0;
+    color: #656565;
+    font-weight: 400;
+    overflow: hidden;
+    width: auto; 
+}
+.noti-main-row p .orange { color:#F7921A}
+.noti-main-row p .blue { color:#52ACF5}
+
+.noti-main-row .close-icon-middle { display: inline-block; cursor: pointer; margin-left: 10px; vertical-align: middle;}
+
+footer {
+    background-color: #2b2d3c;
+    color: #ffffff;
+}
+
+
+.load-more-auctions {
+    color: #ffffff;
+    background-color: #F7921A;
+}
+
+.btn-orange {
+    color: #ffffff;
+    background-color: #F7921A;
+}
+
+.divider {
+    width:100%;
+    background:#dee2e6;
+    top:5px;
+    height:1px;
+}
+
+.footer-heading-underline {
+    border-top: 1px solid #656565;
+}
+
+.footer-copyright span, .footer-text {
+    color: #F7921A;
+}
+
+a.footer-text:hover {
+    font-weight: bold;
+    color: #F7921A;
+    text-decoration: none;
+}

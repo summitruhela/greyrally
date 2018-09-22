@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>GREYRALLY | Admin</title>
+<link rel="stylesheet" href="/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/admin/css/perfect-scrollbar.min.css" />
+<link rel="stylesheet" href="/admin/css/style.css"/>
+<link rel="shortcut icon" href="/images/favicon.png"/>
+<link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="/admin/css/datatables.min.css">
+<!-- ========= -->
+
+</head>
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <% include ./navbar.ejs %>
+    <!--End navbar-->
+    <div class="container-fluid">
+    <div class="row row-offcanvas row-offcanvas-right">
+    <!-- SIDEBAR STARTS -->
+    <% include ./slidebar.ejs %>
+    <!-- SIDEBAR ENDS -->
+      <div class="content-wrapper">
+        <h3 class="text-primary mb-4">Dashboard</h3>
+        <% include ./header.ejs %>
+        <!-- BEGIN: BODY-->
+
+        <div class="card">
+          <div class="card-block">
+            <h5 class="card-title mb-4"><%= userInfo.userName %></h5>
+            <br>
+            <br>
+            <table id="hackers" class="display" cellspacing="0" width="100%">
+              <tbody class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide _mCS_1" style="height: 325px; position: relative; overflow: visible;" data-scrollbar-shown="true">
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;">
+                  <td class="m-datatable__cell--sorted m-datatable__cell auction_td4_width">Name</td>
+                  <td class="m-datatable__cell--sorted m-datatable__cell"><%= userInfo.name%></td>
+                </tr>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                  <td>Username</td>
+                  <td><%=userInfo.userName %></td>
+                </tr>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                  <td>Email</td>
+                  <td><%=userInfo.email %></td>
+                </tr>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                  <td>Role</td>
+                  <td>
+                    <% if(userInfo.role == 2) { %>
+                      Hacker
+                    <% } else { %>
+                      Company
+                    <% } %>
+                  </td>
+                </tr>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                  <td>Premium User</td>
+                  <td class="m-datatable__cell--sorted m-datatable__cell">
+                    No
+                  </td>
+                </tr>
+                <tr class="m-datatable__row m-datatable__row--even" style="height: 55px;"">
+                  <td>Rating</td>
+                  <td class="m-datatable__cell--sorted m-datatable__cell">
+                    <p style="margin-top:0 !important;">
+                      <% for(let j = 1 ; j <= 5 ;j++) { %>
+                        <% if ( j <= Rating) { %>
+                        <img alt="" src="/img/Rating<%=j%>_10x10.png">
+                        <% } else { %>
+                        <img alt="" src="/img/Rating0_10x10.png">
+                      <% }  %>
+                      <% }%>
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <!-- =========== -->
+
+      </div>
+      <!-- begin::Footer -->
+      <% include ./footer.ejs %>
+      <!-- end::Footer -->
+    </div>
+  </div>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/admin/js/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="/admin/js/off-canvas.js"></script>
+<script type="text/javascript" src="/admin/js/hoverable-collapse.js"></script>
+<script type="text/javascript" src="/admin/js/misc.js"></script>
+<script type="text/javascript" src="/admin/js/maps.js"></script>
+
+</body>
+</html>

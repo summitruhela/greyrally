@@ -1,0 +1,100 @@
+body {
+    background-color: #656565;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-control {
+    background-color: #e1e1e1;
+}
+
+.form-holder {
+    padding: 50px 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    height:auto;
+}
+
+.logo-holder {
+    background-color: #282b3b;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+
+.tag-line {
+    color: #ffffff;
+    font-size: 0.875rem;
+}
+
+.form-box {
+    background-color: #ffffff;
+}
+
+#loginUl,
+#createUl {
+    display: inline-block;
+}
+
+#login,
+#register {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #656565;
+}
+
+.forgot-password a {
+    text-decoration: underline;
+}
+
+.pin-tooltip {
+    position: relative;
+    display: inline-block;
+    color: #656565;
+}
+
+.pin-tooltip .pin-tooltipText,
+.pgp-tooltip .pgp-tooltipText {
+    visibility: hidden;
+    background-color: #ffffff;
+    color: #656565;
+    text-align: left;
+    border: 1px solid #282b3b;
+    border-radius: 6px;
+    padding: 5px;
+    font-size: 0.875rem;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.pin-tooltip:hover .pin-tooltipText,
+.pgp-tooltip:hover .pgp-tooltipText {
+    visibility: visible;
+}
+
+.need-key a {
+    text-decoration: underline;
+}
+
+.privacy-terms a:last-child {
+    float: right;
+}
+
+.privacy-terms a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #656565;
+}

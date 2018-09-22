@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>GREYRALLY</title>
+  <meta name="description" content="Latest updates and statistic charts">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="/css/auctionDetails.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+  <link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+  <link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+</head>
+<!-- end::Head -->
+
+<!-- end::Body -->
+
+<body>
+  <!-- begin::Header -->
+  <% include ../new-header.ejs %>
+    <!-- end::Header -->
+
+    <!--Bid Modal -->
+    <div class="modal fade" id="bidModal" tabindex="-1" role="dialog" aria-labelledby="bidTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bidTitle" value="<%= Number(auction.currentBid) %>">Current Bid:
+              <i class="fab fa-bitcoin" aria-hidden="true"></i>
+              <%= Number(auction.currentBid) %>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <i class="fas fa-times"></i>
+              </span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form autocomplete="off" id="bidOnAuction" class="needs-validation" novalidate>
+              <div class="form-group row">
+                <label for="your-bid" class="col-form-label col-sm-3">Your Bid:
+                  <i class="fab fa-bitcoin" aria-hidden="true"></i>
+                </label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control" id="your-bid" autocomplete="off" autofill="off" step="0.01" min="<%= Number(auction.currentBid) + .01 %>"
+                    required>
+                  <div class="invalid-feedback" id="bidAmountError"></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="bid-pin" class="col-form-label col-sm-3">Your Pin:</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" autocomplete="off" autofill="off" maxlength="6" id="bid-pin"
+                    required>
+                  <div class="invalid-feedback" id="bidPinError"></div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-orange float-right" id="makeBid">Bid</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buyout Modal -->
+    <div class="modal fade" id="buyOutModal" tabindex="-1" role="dialog" aria-labelledby="buyOutTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="buyOutTitle">Buyout this auction for
+              <%= auction.buyoutPrice %>
+                <i class="fab fa-bitcoin" aria-hidden="true"></i>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">
+                <i class="fas fa-times"></i>
+              </span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form autocomplete="off" id="buyoutAuction" class="needs-validation" novalidate>
+              <div class="form-group row">
+                <label for="buyout-pin" class="col-form-label col-sm-3">Your Pin:</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" autocomplete="off" autofill="off" maxlength="6" id="buyout-pin" required>
+                  <div class="invalid-feedback" id="buyoutPinError"></div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-orange float-right">Buy</button>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <small>NOTE: Clicking "Buy" will end the auction immediately and remove the buyout price from you wallet. This action
+              can not be reversed.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mb-5">
+      <div class="row auction-details-header">
+        <% if(msg.length) { %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>
+              <%= msg %>
+            </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <% } %>
+
+
+            <div class="mr-auto">
+              <h3 class="auction-details">Auction Details</h3>
+            </div>
+      </div>
+      <div class="row auction-details-wrapper h-100">
+        <div class="py-3 col-sm-12 col-md-12 col-lg-12 col-xm-12">
+          <div class="float-left">
+            <h3 class="auction-title">
+              <%= auction.name %>
+            </h3>
+          </div>
+          <div class="float-right">
+            <% if(auction.ownAuction == 0) {%>
+              <% if(auction.isFollowing) { %>
+                <a href="/users/<%= user %>/auctions/<%= auction.name %>/unfollow?fromSrc=/users/<%= user %>/auctions/<%= auction.name %>" class="unfollow">
+                  <i class="fas fa-heart"></i>
+                </a>
+                <% } else { %>
+                  <a href="/auction/<%= auction.name %>/preFollow?fromSrc=/users/<%= user %>/auctions/<%= auction.name %>" class="follow">
+                    <i class="far fa-heart"></i>
+                  </a>
+                  <% } %>
+                    <% } %>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 auction-details-left">
+          <div class="row"><span class="col-md-4 col-6">Expires: </span>
+            <span class="col-md-8 col-6"><% if (auction.expirationDate == "Invalid date") {%>Pending
+              <%} else { %>
+                <%= auction.expirationDate %>
+                  <%} %>
+            </span>
+          </div>
+          <div class="mt-2 row"><span class="col-md-4 col-6">Views: </span>
+            <span class="col-md-8 col-6"><%= auction.uniqueViews %></span>
+          </div>
+          <div class="mt-2 row"><span class="col-md-4 col-6">GR Score: </span>
+            <span class="col-md-8 col-6"><% if( auction.adminRating == 0 ) { %>Unverified
+              <% } else { %>
+                <%= auction.adminRating %> /10
+                  <% } %>
+            </span>
+          </div>
+          <% if(auction.ownAuction == 0) {%>
+            <div class="mt-2 row"><span class="col-md-4 col-6">Seller: </span>
+              <span class="col-md-8 col-6"><a href="/users/<%= user %>/seller/<%= auction.user %>">
+                <%= auction.user %>
+                </a>
+              </span>
+            </div>
+            <div class="my-2 row"><span class="col-md-4 col-6">Rating: </span>
+              <span class="col-md-8 col-6"><% if (auction["userRating"].userRating == undefined) { %>Not Yet Rated
+                <% } else {%>
+                  <% for(let j = 1 ; j <= 5 ;j++) { %>
+                    <% if ( j <= auction["userRating"].userRating) { %>
+                      <img alt="" src="/img/Rating<%=j%>_10x10.png">
+                      <% } else { %>
+                        <img alt="" src="/img/Rating0_10x10.png">
+                        <% }  %>
+                          <% }  %>
+                            <% }%>
+                          </span>
+            </div>
+            <% } %>
+              <div class="position-relative">
+                <span class="position-absolute divider"></span>
+              </div>
+              <div class="pt-3 row">
+                <span class="col-md-4 col-6">Use Case: </span>
+                <span class="col-md-8 col-6">
+                  <%= auction.case %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Operating System: </span>
+                <span class="col-md-8 col-6">
+                  <%= auction.os %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Manufacturer: </span>
+                <span class="col-md-8 col-6">
+                  <% if(auction.manufacturer) {%>
+                    <%= auction.manufacturer %>
+                      <% } else {%>Not Available
+                        <%}%>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Type: </span>
+                <span class="col-md-8 col-6">
+                  <%= auction.type %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Sub-Type: </span>
+                <span class="col-md-8 col-6">
+                  <% if (auction.subType.length == 0) {%>Not Available
+                    <% } else {%>
+                      <%= auction.subType.join(', ') %>
+                        <% } %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Date Acquired: </span>
+                <span class="col-md-8 col-6">
+                  <%= auction.roughTimeAcquired %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Status: </span>
+                <span class="col-md-8 col-6">
+                  <% if(auction.status == 1) { %>Active
+                    <% } else { %>Not active
+                      <% } %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Approved Status: </span>
+                <span class="col-md-8 col-6">
+                  <% if(auction.adminApproved == 1) { %>Approved
+                    <% } else { %>Pending
+                      <% } %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Listing Date: </span>
+                <span class="col-md-8 col-6">
+                  <%= auction.listingDate %>
+                </span>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Expiration Countdown: </span>
+                <% if(auction.adminApproved == 0) { %>
+                  <span class="col-md-8 col-6">Pending</span>
+                  <% } else {if(auction.status == 1) { %>
+                    <input type="hidden" id="expiration" value="<%= auction.expirationDate %>">
+                    <span class="col-md-8 col-6" id="count-down"></span>
+                    <% } else { %>
+                      <span class="col-md-8 col-6">Expired/Disabled</span>
+                      <% }}%>
+              </div>
+              <div class="mt-2 row">
+                <span class="col-md-4 col-6">Description: </span>
+                <span class="col-md-8 col-6">
+                  <% if (auction.description) { %>
+                    <%= auction.description %>
+                      <% } else {%>No Description
+                        <% } %>
+                </span>
+              </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 border-left auction-details-right">
+          <% if(auction.ownAuction == 1) {%>
+            <div>
+              <h2 style="color: #656565;font-weight: normal;">You own this auction.</h2>
+              <h2 style="color: #656565;font-weight: normal;">
+                <span style="color: #F7921A">Status:</span>
+                <%if (auction.soldOut == 1) {%>
+                  <td>SOLD</td>
+                  <%} else if(auction.adminApproved == 0) { %>
+                    <td>PENDING</td>
+                    <%  } else if (auction.adminApproved == 1 && auction.status == 0){ %>
+                      <td>EXPIRED</td>
+                      <% } else {%>
+                        <td>LIVE</td>
+                        <% } %>
+              </h2>
+            </div>
+            <% } %>
+              <div class="container">
+                <div class="row">
+                  <span id="<%=auction.name%>" class="col-md-8 col-6 m-auto">Current Bid:
+                    <i class="fab fa-bitcoin" aria-hidden="true"></i>
+                    <%= auction.currentBid %>
+                  </span>
+                  <% if(auction.ownAuction == 0) { %>
+                    <% if(auction.status == 1) { %>
+                      <button type="button" data-toggle="modal" data-target="#bidModal" class="btn btn-orange btn-lg btn-block col-md-4 col-6">BID</button>
+                      <% } %>
+                        <% }%>
+                </div>
+                <div class="row mt-4">
+                  <% if(auction.buyoutPrice > 0) { %>
+                    <span class="col-md-8 col-6 m-auto">Buyout Price:
+                      <i class="fab fa-bitcoin" aria-hidden="true"></i>
+                      <%= auction.buyoutPrice %>
+                    </span>
+                    <% } else {%>
+                      <span class="col-md-8 col-6">Buyout Price: </span>
+                      <span class="col-md-4 col-6 text-center">Not Available</span>
+                      <% }%>
+                        <% if(auction.ownAuction == 0) { %>
+                          <% if(auction.status == 1) { %>
+                            <% if(auction.buyoutPrice > 0) { %>
+                              <button type="button" data-toggle="modal" data-target="#buyOutModal" class="btn btn-orange btn-lg btn-block col-md-4 col-6" id="buyIt2">BUY</button>
+                              <% } %>
+                                <% } %>
+                                  <% }%>
+                </div>
+              </div>
+
+              <% if(auction.ownAuction == 0) {%>
+                <div class="border-top mt-4">
+                  <h3>Disclaimer:</h3>
+                  <small>Refer to the terms of service. An offer to buy is not a guarantee that any sale will occur. If you place
+                    a buy request, you may still not receive a product if the seller violates the terms of service, produces
+                    an incomplete or illegal product, or if your purchasing information cannot be verified. By making a bid,
+                    you represent and warrant that you have a legitimate interest in the item for sale, that you will not
+                    use anything purchased or learned for illegal purposes, including reverse engineering through copyright
+                    protection; unauthorized access to networks, computers or systems; interception or access of live or
+                    stored communications; or any other illicit purpose. You also warrant that you are not using any means
+                    to deceptively obfuscate your country of origin or take any other measures to defeat GreyRally's systems
+                    and terms of service that are designed to ensure that only authorized users may access and use the site.
+                    THIS SITE AND ANYTHING YOU PURCHASE ON IT ARE OFFERED "AS-IS." THERE IS NOT REPRESENTATION OR WARRANTY
+                    OF ANY KIND, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR ANY PARTICULAR PURPOSE, OR FUNCTIONALITY.
+                    ALTHOUGH GREYRALLY MAKES ALL AVAILABLE EFFORTS TO ENSURE THAT ITS SELLERS AND THE PURCHASES MADE THEREIN
+                    ARE FOR IMPROVING SECURITY AND INFRASTRUCTURE, GREYRALLY TAKES NO RESPONSIBILITY FOR THE ULTIMATE RESULTS
+                    OR PRODUCTS. GREYRALLY EXPRESSLY DISCLAIMS ALL RESPONSIBILITY FOR THE ILLEGAL ACTIONS TAKEN BY ANY PURCHASER.
+                  </small>
+                </div>
+                <% } %>
+        </div>
+
+      </div>
+    </div>
+    </div>
+    <% include ../footer.ejs %>
+</body>
+<!-- end::Body -->
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/jquery.countdown-2.2.0/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="/js/sweetalert-1.1.3/sweetalert.min.js"></script>
+<script src="/js/socketIO-2.0.4/socketIO.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/auction/auctionDetails.js"></script>
+
+</html>

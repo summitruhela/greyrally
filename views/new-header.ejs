@@ -1,0 +1,71 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">
+            <img alt="GreyRally Logo" src="/img/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search Auctions" aria-label="Search" id="searchAuctions">
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-white">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </form>
+            <% if(typeof user == 'undefined' || user == 'NotLoggedIn') { %>
+                <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about-us">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Log In | Sign Up</a>
+                        </li>
+                    </ul>
+                <% } else { %>
+                    
+                    <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about-us">About</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <div class="nav-link" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <span class="badge badge-pill btn-orange" id="notificatonCounter" style="visibility: hidden;"></span>
+                                    <img alt="" src="/img/alert_32x32_e1e1e1.png" id="notifications" />
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right" id="listNotifications" aria-labelledby="notificationDropdown">
+                                    
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/<%= user %>/create-auction"><img alt="" src="/img/Upload_32x32.png" /></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="#" id="myAccountDropdown" data-user="<%= user %>" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <img alt="" src="/img/User_32x32.png" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="myAccountDropdown">
+                                    <a class="dropdown-item" href="/users/<%= user %>/profile">Profile</a>
+                                    <a class="dropdown-item" href="/users/<%= user %>/auctions">My Auctions</a>
+                                    <a class="dropdown-item" href="/users/<%= user %>/auctions/followed">Followed Auctions</a>
+                                    <a class="dropdown-item" href="/users/<%=user%>/wallet">My Wallet</a>
+                                    <a class="dropdown-item" href="/users/<%=user%>/transactions/history">My Transactions</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" onclick="logout()">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    <% } %>
+        </div>
+    </nav>
+</header>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/common/header.js"></script>

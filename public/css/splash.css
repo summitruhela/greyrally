@@ -1,0 +1,15 @@
+.splash-footer{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+@media (max-width: 767px) {
+    form {
+        margin: auto;
+        padding-top: 1rem;
+    }
+}

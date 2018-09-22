@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!-- begin::Head -->
+<head>
+<meta charset="utf-8" />
+<title>GREYRALLY</title>
+<meta name="description" content="Latest updates and statistic charts">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link href="/css/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/css/globalStyles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+    crossorigin="anonymous">
+<link href="/css/suggestion-box.css" rel="stylesheet" type="text/css">
+
+<link rel="shortcut icon" href="/img/favicon.png" sizes="16*16" />
+<link href="/css/sweetalert-1.1.3/sweetalert.min.css" rel="stylesheet" />
+</head>
+<!-- end::Head -->
+
+<!-- end::Body -->
+<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+
+<!-- Modal for fundout ============================================-->
+
+<!-- ======================================================================-->
+
+<!-- begin:: Page -->
+<div class="m-grid m-grid--hor m-grid--root m-page">
+
+<!-- begin::Header -->
+<% include ../header.ejs %>
+<!-- end::Header -->
+
+<!-- begin::Body -->
+<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+  <!-- BEGIN: Left Aside -->
+  <button class="m-aside-left-close m-aside-left-close--skin-dark" id="m_aside_left_close_btn"><i class="la la-close"></i></button>
+
+  <!-- END: Left Aside -->
+  <div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+      <div class="align-items-center">
+        <div class="row">
+          <div class="col-sm-6" style="display:flex">
+            <h3 class="m-subheader__title ">Wallet</h3>
+            <div class="nav navbar-nav navbar-right transaction-drop-down">
+<!-- <div id="fat-menu" class="dropdown"> <a href="#" class="dropdown-toggle main" id="drop3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Bitcoin <span class="caret"></span> </a>
+                <ul class="dropdown-menu" aria-labelledby="drop3" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+             <!-- <div id="fat-menu" class="dropdown"> <a href="#" class="dropdown-toggle main" id="drop3" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Bitcoin <span class="caret"></span> </a>
+<!--                <ul class="dropdown-menu" aria-labelledby="drop3" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                  <li><a href="#">LTC</a></li>
+                  <li><a href="#">ETH</a></li>
+                </ul>
+              </div>i-->
+            </div>
+          </div>
+          <div class="col-sm-6 bs-example bs-example-tabs pull-right custom-tab-transaction" data-example-id="togglable-tabs">
+            <p style="font-size:16px; font-style:italic; font-weight:400; color:#656565; text-align:right">DOGECOIN Coming Soon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Subheader -->
+
+    <div class="col-xl-12">
+      <div class="m-portlet m-portlet--mobile ap-custom mt-4">
+        <div class="m-portlet__body">
+          <div class="col-xl-12 col-md-12 col-sm-12 wallet-main ">
+            <table width="50%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td >Account Type:</td>
+                <td ><span>Bitcoin <span style="color:#F7921A; font-weight:400;">
+                  <i class="fab fa-bitcoin" aria-hidden="true"></i></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Total Funds:</td>
+                <td><span><%= balance %> </span></td>
+              </tr>
+              <tr>
+                <td>Usable Funds:</td>
+                <td><span><%= balance %> </span></td>
+              </tr>
+              <tr>
+                <td>Unconfirmed Balance:</td>
+                <td><span id="currentBidBTC" class="track"> <%= unconfirmedBal %> BTC  </span></td>
+              </tr>
+              <tr>
+                <td>BTC Address:</td>
+                <td >
+                  <span class="copy_input"  id="btcAdd" style="font-size: 14px; font-weight: 400; background:#e1e1e1; border: 1px solid #656565;    color: #000;    border-radius: 0; height: 40px; display: inline-block; padding: 8px;"><%=  a.BTCadd %></span>
+                  <button class="copy-link" onclick="copyToClipboard('#btcAdd')"> COPY </button>
+                </td>
+              </tr>
+              <tr>
+                <td> QR: </td>
+                <td><div id="qrcode"></div></td>
+              </tr>
+            </table>
+            <hr>
+
+            <div class="main-wallet2">
+              <div class="wl-left">
+                <p>BTC Address</p>
+                <p>Your PIN</p>
+              </div>
+              <div class="wl-right">
+                <form class="login-form" data-parsley-excluded="input[type=button], input[type=submit], input[type=reset], input[type=checkbox], input[type=hidden], [disabled], :hidden" data-parsley-trigger="keyup" data-parsley-validate role="form" action="/users/<%= user %>/transactions/cashout" method="POST" autocomplete="off">
+
+<!--Horseshit fix for autosuggest
+<input style="display:none" type="text" name="PIN"/>
+<input style="display:none" type="text" name="password"/>
+<input style="display:none" type="text" name="btc_add" />
+ End horseshit...for now -->
+
+                  <input readonly onfocus="this.removeAttribute('readonly');" class="password form-username form-control" id="btc_add" name="btc_add" data-parsley-type="alphanum"
+                    data-parsley-length="[34,34]" data-parsley-length-message = "Invalid BTC address length" data-parsley-required-message="Please enter valid BTC address" type="text" style="width:59%" data-parsley-required="true">
+                  <input readonly onfocus="this.removeAttribute('readonly');" class="form-password form-control parsley-success custom-passwrd " id="pinCashout" type="password" autocomplete="off" autofill="off" name="PIN" maxlength="6" style="font-weight:400px; font-size: 50px; width:125px;" data-parsley-type="digits" name="password" parsley-required="true" required>
+                  <span id="pinErr" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px"></span></br>
+                  <% if(err.length) { %>
+                    <span id="pinErr" style="font-weight: 400; font-size: 14px; color: #de995e; letter-spacing: 1px"><%= err %></span></br>
+                  <% } %>
+                  <button type="submit" id="fundOut" class="btn btn-primary orange" style="background-color:#808080d6!important" disabled>
+                    Cashout
+                  </button>
+
+                </form>
+                <div class="row">
+                          <div class="col-8" style="font-size: 11px">
+                            <p > You are sending the total usable amount of bitcoin in your GREYRALLY wallet to the address specified above. The transaction will be initiated by GREYRALLY with a transaction fee of 0.0001 BTC immediately after hitting this button. GREYRALLY will notify you by email when this transaction is initiated and if there is an error with the submitted address.
+                            </p>
+                          </div>
+                        </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin::Footer -->
+<% include ../footer.ejs %>
+<!-- end::Footer -->
+<!-- end:: Page -->
+
+<!-- begin::Scroll Top -->
+<!-- <div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300"> <i class="fa fa-angle-up"></i> </div> -->
+<!-- end::Scroll Top --> <!-- begin::Quick Nav -->
+
+<!--begin::Base Scripts -->
+<script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/js/scripts.bundle.js" type="text/javascript"></script>
+<script src="/js/common/common.js" type="text/javascript"></script>
+<script src="/js/jquery.qrcode.min.js" type="text/javascript" ></script>
+<script src="/js/sweetalert-1.1.3/sweetalert.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/parsley.js"></script>
+
+<!-- QR code generator -->
+<script type="text/javascript">
+  let BTC = $('#btcAdd').text();
+  $('#qrcode').qrcode({width: 100,height: 100, text: BTC});
+</script>
+<!-- ================== -->
+
+<!-- DISABLED : confirmation: Generating new BTC -->
+<!-- <script type="text/javascript">
+  $("#newAdd").click(function() {
+    swal({
+      title: "Are you sure ?",
+      text: "It will charges 0.0001 btc for creating new address and transferring fund from old address.",
+      type: "info",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      showLoaderOnConfirm: true
+    }, function () {
+      url = window.location.pathname;
+      let queryParams = url.split( '/' );
+      let username = queryParams[2];
+      $.ajax({
+        type: "POST",
+        url: "/users/"+ username +"/wallet/newBTC",
+        success: function(response) {
+        swal({
+          title: "Success!",
+          type: "success",
+          timer: 2000,
+          showConfirmButton: false
+        }, function(){
+            window.location.href = "/users/" + username + "/wallet";
+        })
+      }
+    })
+  })
+});
+</script> -->
+<!-- ================== -->
+
+
+
+<script type="text/javascript">
+    let $input = $('input'),
+      $register = $('#fundOut');
+      $("#pinCashout").keyup(function() {
+        var regexp1=new RegExp("[^0-9]");
+        let pin = document.getElementById("pinCashout").value ;
+        if((!regexp1.test(pin))&&($('#pinCashout').val().length == '6')) {
+          $('#pinErr').text('');
+          $('#fundOut').prop("disabled", false);
+          $('#fundOut').css('background-color', '#F7921A');
+        } else {
+          $('#pinErr').text('Pin should be 6 digit long.');
+          $('#fundOut').prop("disabled", true);
+          $('#fundOut').css('background-color', '#808080d6');
+          return false;
+        }
+      })
+
+</script>
+
+<script type="text/javascript">
+  function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    alert("It's Copied.");
+  }
+</script>
+
+<!--end::Base Scripts -->
+</body>
+<!-- end::Body -->
+</html>
